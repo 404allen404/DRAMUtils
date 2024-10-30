@@ -76,7 +76,7 @@ struct MemDynamicPowerType {
     double flightTime;
     double lineSwing;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemDynamicPowerType, capacities, lineImpedance, riseTime, lineSwing)
+NLOHMANN_JSONIFY_ALL_THINGS(MemDynamicPowerType, capacities, lineImpedance, riseTime, flightTime, lineSwing)
 
 enum class TerminationScheme {
     OPEN_DRAIN_PULL_UP = 0,
