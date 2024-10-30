@@ -79,15 +79,15 @@ struct MemDynamicPowerType {
 NLOHMANN_JSONIFY_ALL_THINGS(MemDynamicPowerType, capacities, lineImpedance, riseTime, flightTime, lineSwing)
 
 enum class TerminationScheme {
-    OPEN_DRAIN_PULL_UP = 0,
-    OPEN_DRAIN_PULL_DOWN = 1,
+    PODL = 0,
+    LWSTL = 1,
     PUSH_PULL = 2,
     Invalid = -1
 };
 NLOHMANN_JSON_SERIALIZE_ENUM(TerminationScheme,
                              {{TerminationScheme::Invalid, nullptr},
-                              {TerminationScheme::OPEN_DRAIN_PULL_UP, "ODPU"},
-                              {TerminationScheme::OPEN_DRAIN_PULL_DOWN, "ODPD"},
+                              {TerminationScheme::PODL, "PODL"},
+                              {TerminationScheme::LWSTL, "LWSTL"},
                               {TerminationScheme::PUSH_PULL, "PP"}})
 
 struct MemStaticPowerType {
