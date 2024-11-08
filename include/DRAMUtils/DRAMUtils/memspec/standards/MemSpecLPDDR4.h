@@ -68,16 +68,6 @@ struct MemDynamicPowerCapcitancePairType {
 };
 NLOHMANN_JSONIFY_ALL_THINGS(MemDynamicPowerCapcitancePairType, capacity, swing)
 
-// Line capcity is calculated seperately
-struct MemDynamicPowerType {
-    std::vector<MemDynamicPowerCapcitancePairType> capacities;
-    double lineImpedance;
-    double riseTime;
-    double flightTime;
-    double lineSwing;
-};
-NLOHMANN_JSONIFY_ALL_THINGS(MemDynamicPowerType, capacities, lineImpedance, riseTime, flightTime, lineSwing)
-
 enum class TerminationScheme {
     PODL = 0,
     LWSTL = 1,
@@ -98,11 +88,11 @@ struct MemStaticPowerType {
 NLOHMANN_JSONIFY_ALL_THINGS(MemStaticPowerType, R_ON, R_TT, termination)
 
 struct MemImpedanceSpecTypeLPDDR4 {
-    MemDynamicPowerType dynamic_ck;
-    MemDynamicPowerType dynamic_cb;
-    MemDynamicPowerType dynamic_rb;
-    MemDynamicPowerType dynamic_wb;
-    MemDynamicPowerType dynamic_dqs;
+    double dynamicEnergy_ck;
+    double dynamicEnergy_cb;
+    double dynamicEnergy_rb;
+    double dynamicEnergy_wb;
+    double dynamicEnergy_dqs;
 
     MemStaticPowerType static_ck;
     MemStaticPowerType static_cb;
@@ -110,7 +100,7 @@ struct MemImpedanceSpecTypeLPDDR4 {
     MemStaticPowerType static_wb;
     MemStaticPowerType static_dqs;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR4, dynamic_ck, dynamic_cb, dynamic_rb, dynamic_wb, dynamic_dqs, static_ck, static_cb, static_rb, static_wb, static_dqs)
+NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR4, dynamicEnergy_ck, dynamicEnergy_cb, dynamicEnergy_rb, dynamicEnergy_wb, dynamicEnergy_dqs, static_ck, static_cb, static_rb, static_wb, static_dqs)
 
 struct MemTimingSpecTypeLPDDR4
 {
