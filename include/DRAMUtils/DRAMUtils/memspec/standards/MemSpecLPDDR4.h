@@ -72,13 +72,15 @@ enum class TerminationScheme {
     PODL = 0,
     LWSTL = 1,
     PUSH_PULL = 2,
+    UNTERMINATED = 3,
     Invalid = -1
 };
 NLOHMANN_JSON_SERIALIZE_ENUM(TerminationScheme,
                              {{TerminationScheme::Invalid, nullptr},
                               {TerminationScheme::PODL, "PODL"},
                               {TerminationScheme::LWSTL, "LWSTL"},
-                              {TerminationScheme::PUSH_PULL, "PP"}})
+                              {TerminationScheme::PUSH_PULL, "PP"},
+                              {TerminationScheme::UNTERMINATED, "UNTERMINATED"}})
 
 struct MemStaticPowerType {
     double R_ON;
