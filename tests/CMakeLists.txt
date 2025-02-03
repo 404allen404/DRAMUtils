@@ -6,7 +6,7 @@ if (DRAMUTILS_USE_FETCH_CONTENT)
     if (DRAMUTILS_USE_FETCH_CONTENT_GOOGLE_TEST)
         FetchContent_Declare(
             GTest
-            URL https://github.com/google/googletest/archive/refs/tags/release-1.12.1.tar.gz
+            URL https://github.com/google/googletest/releases/download/v1.15.2/googletest-1.15.2.tar.gz
             OVERRIDE_FIND_PACKAGE
         )
         set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
