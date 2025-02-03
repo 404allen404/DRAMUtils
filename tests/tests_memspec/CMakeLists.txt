@@ -10,7 +10,7 @@ target_compile_definitions(tests_memspec PUBLIC TEST_RESOURCE_DIR="${CMAKE_CURRE
 target_link_libraries(tests_memspec
     gtest_main
     gtest
-    DRAMSys::DRAMUtils
+    DRAMUtils::DRAMUtils
 )
 
 gtest_discover_tests(tests_memspec
