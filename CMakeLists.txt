@@ -47,24 +47,27 @@ include(build_source_group_include)
 include(enable_clang_format)
 include(enable_clang_tidy)
 include(enable_cppcheck)
-include(FetchContent)
 
-# Check if standalone build or being included as submodule
-get_directory_property(DRAMUTILS_IS_SUBMODULE PARENT_DIRECTORY)
-
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-### Project settings ###
 message(STATUS "CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
 message(STATUS "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}")
 message(STATUS "" )
 
-if(NOT DRAMUTILS_IS_SUBMODULE)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+if(NOT PROJECT_IS_TOP_LEVEL)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 endif()
+
+### Project settings ###
+option(OPTIMIZE_FOR_NATIVE "Build with -march=native (overrides CPU_TYPE if enabled)" ON)
+
+# Use sane defaults for FetchContent:
+# In case we are the top-level project, get everything by default
+# In case we are included in another project, the user might want to provide their own system dependencies
+option(DRAMUTILS_USE_FETCH_CONTENT "Enable the FetchContent module" ${PROJECT_IS_TOP_LEVEL})
+option(DRAMUTILS_USE_FETCH_CONTENT_NLOHMANN_JSON "Enable FetchContent to provide nlohmann json" ${DRAMUTILS_USE_FETCH_CONTENT})
 
 ### DRAMUtils directories ###
 set(DRAMUTILS_INCLUDE_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/include")
@@ -79,60 +82,47 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CPU_TYPE "" CACHE STRING "CPU type for -march=CPU_TYPE compile option")
+# Set CPU_TYPE to native if OPTIMIZE_FOR_NATIVE is enabled
+if(OPTIMIZE_FOR_NATIVE)
+    if(CPU_TYPE)
+        message(NOTICE "OPTIMIZE_FOR_NATIVE is enabled. Overriding CPU_TYPE from \"${CPU_TYPE}\" to \"native\".")
+    endif()
+    set(CPU_TYPE "native")
+endif()
+
+# add CPU_TYPE to cmake cxx flags
+if(CPU_TYPE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=${CPU_TYPE} -mtune=${CPU_TYPE}")
+endif()
+
+
 ###############################################
 ###           Library Settings              ###
 ###############################################
 
-### Detect OS threading library ###
-find_package(Threads)
+if (DRAMUTILS_USE_FETCH_CONTENT)
+    include(FetchContent)
 
-### nlohmann_json ###
-add_subdirectory(${DRAMUTILS_LIBRARY_DIR}/nlohmann_json)
-
-### GoogleTest ###
-if(DRAMUTILS_BUILD_TESTS)
-    FetchContent_Declare(
-	    googletest
-	    GIT_REPOSITORY https://github.com/google/googletest
-		GIT_TAG release-1.12.1
-	)
-
-    # For Windows: Prevent overriding the parent project's compiler/linker settings
-    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-    FetchContent_MakeAvailable(googletest)
-    set_target_properties(gmock PROPERTIES FOLDER lib)
-    set_target_properties(gmock_main PROPERTIES FOLDER lib)
-    set_target_properties(gtest PROPERTIES FOLDER lib)
-    set_target_properties(gtest_main PROPERTIES FOLDER lib)
+    if(DRAMUTILS_USE_FETCH_CONTENT_NLOHMANN_JSON)
+        add_subdirectory(${DRAMUTILS_LIBRARY_DIR}/nlohmann_json)
+    endif()
 endif()
+
+find_package(nlohmann_json REQUIRED)
 
 ###############################################
 ###                 DRAMUtils               ###
 ###############################################
 
-file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS ${DRAMUTILS_INCLUDE_DIR}/*.cpp)
-file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS ${DRAMUTILS_INCLUDE_DIR}/*.h; ${DRAMUTILS_INCLUDE_DIR}/*.hpp)
-
-add_library(${PROJECT_NAME} INTERFACE) # ${SOURCE_FILES} ${HEADER_FILES})
-target_include_directories(${PROJECT_NAME} INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
-
-target_link_libraries(${PROJECT_NAME}
-    INTERFACE
-        nlohmann_json::nlohmann_json
-)
-
-add_library(DRAMUtils::DRAMUtils ALIAS ${PROJECT_NAME})
-add_library(DRAMSys::DRAMUtils ALIAS ${PROJECT_NAME})
-
-# build_source_group_include()
+add_subdirectory(include)
 
 ###############################################
 ###           Test Directory                ###
 ###############################################
 
 if(DRAMUTILS_BUILD_TESTS)
-    include( GoogleTest )
-    include( CTest )
+    enable_testing()
     add_subdirectory(tests)
 endif()
 
