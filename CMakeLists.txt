@@ -78,10 +78,6 @@ set(DRAMUTILS_TEST_DIR    "${CMAKE_CURRENT_SOURCE_DIR}/tests")
 ### Build options ###
 option(DRAMUTILS_BUILD_TESTS "Build DRAMUtils unit tests" OFF)
 
-### Compiler settings ###
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ### Compiler optimization settings ###
 if(PROJECT_IS_TOP_LEVEL)

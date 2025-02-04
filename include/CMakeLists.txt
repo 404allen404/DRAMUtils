@@ -1,5 +1,9 @@
-add_library(DRAMUtils INTERFACE) # ${SOURCE_FILES} ${HEADER_FILES})
+add_library(DRAMUtils INTERFACE)
 target_include_directories(DRAMUtils INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/DRAMUtils")
+
+target_compile_features(DRAMUtils INTERFACE cxx_std_17)
+set_target_properties(DRAMUtils PROPERTIES CXX_EXTENSIONS OFF)
+set_target_properties(DRAMUtils PROPERTIES CXX_STANDARD_REQUIRED ON)
 
 target_link_libraries(DRAMUtils
     INTERFACE
@@ -7,4 +11,3 @@ target_link_libraries(DRAMUtils
 )
 
 add_library(DRAMUtils::DRAMUtils ALIAS DRAMUtils)
-add_library(DRAMSys::DRAMUtils ALIAS DRAMUtils)
