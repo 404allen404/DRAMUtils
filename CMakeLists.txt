@@ -35,11 +35,15 @@
 ###############################################
 ###              DRAMUtils 1.0              ###
 ###############################################
-cmake_minimum_required(VERSION 3.21.0)
+cmake_minimum_required(VERSION 3.22.0)
 
 set(PROJECT_NAME "DRAMUtils")
 
 project(${PROJECT_NAME} VERSION "1.0")
+
+if(POLICY CMP0135)
+    cmake_policy(SET CMP0135 NEW)
+endif()
 
 ### CMake settings ###
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
