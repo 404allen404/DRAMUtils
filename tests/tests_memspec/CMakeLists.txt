@@ -8,8 +8,8 @@ add_executable(tests_memspec
 
 target_compile_definitions(tests_memspec PUBLIC TEST_RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/temp/")
 target_link_libraries(tests_memspec
-    gtest_main
     gtest
+    gtest_main
     DRAMUtils::DRAMUtils
 )
 
