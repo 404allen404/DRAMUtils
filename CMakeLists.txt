@@ -35,7 +35,7 @@
 ###############################################
 ###              DRAMUtils 1.0              ###
 ###############################################
-cmake_minimum_required(VERSION 3.14.0)
+cmake_minimum_required(VERSION 3.21.0)
 
 set(PROJECT_NAME "DRAMUtils")
 
@@ -60,9 +60,6 @@ if(NOT PROJECT_IS_TOP_LEVEL)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 endif()
 
-### Project settings ###
-option(OPTIMIZE_FOR_NATIVE "Build with -march=native (overrides CPU_TYPE if enabled)" ON)
-
 # Use sane defaults for FetchContent:
 # In case we are the top-level project, get everything by default
 # In case we are included in another project, the user might want to provide their own system dependencies
@@ -82,18 +79,22 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CPU_TYPE "" CACHE STRING "CPU type for -march=CPU_TYPE compile option")
-# Set CPU_TYPE to native if OPTIMIZE_FOR_NATIVE is enabled
-if(OPTIMIZE_FOR_NATIVE)
-    if(CPU_TYPE)
-        message(NOTICE "OPTIMIZE_FOR_NATIVE is enabled. Overriding CPU_TYPE from \"${CPU_TYPE}\" to \"native\".")
+### Compiler optimization settings ###
+if(PROJECT_IS_TOP_LEVEL)
+    option(OPTIMIZE_FOR_NATIVE "Build with -march=native (overrides CPU_TYPE if enabled)" ON)
+    set(CPU_TYPE "" CACHE STRING "CPU type for -march=CPU_TYPE and -mtune=CPU_TYPE compile options")
+    # Set CPU_TYPE to native if OPTIMIZE_FOR_NATIVE is enabled
+    if(OPTIMIZE_FOR_NATIVE)
+        if(CPU_TYPE)
+            message(NOTICE "OPTIMIZE_FOR_NATIVE is enabled. Overriding CPU_TYPE from \"${CPU_TYPE}\" to \"native\".")
+        endif()
+        set(CPU_TYPE "native")
     endif()
-    set(CPU_TYPE "native")
-endif()
 
-# add CPU_TYPE to cmake cxx flags
-if(CPU_TYPE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=${CPU_TYPE} -mtune=${CPU_TYPE}")
+    # add CPU_TYPE to cmake cxx flags
+    if(CPU_TYPE)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=${CPU_TYPE} -mtune=${CPU_TYPE}")
+    endif()
 endif()
 
 
