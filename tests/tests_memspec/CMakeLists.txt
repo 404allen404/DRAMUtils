@@ -2,19 +2,17 @@
 ###               tests_memspec             ###
 ###############################################
 
-cmake_minimum_required(VERSION 3.5.0)
-
-project(tests_memspec)
-
-file(GLOB_RECURSE SOURCE_FILES base/*.cpp)
-
-add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
-
-target_compile_definitions(${PROJECT_NAME} PUBLIC TEST_RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/temp/")
-target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR})
-target_link_libraries(${PROJECT_NAME}
-    gtest_main
-    DRAMSys::DRAMUtils
+add_executable(tests_memspec
+    base/test_base.cpp
 )
 
-gtest_discover_tests(${PROJECT_NAME})
+target_compile_definitions(tests_memspec PUBLIC TEST_RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/temp/")
+target_link_libraries(tests_memspec
+    gtest
+    gtest_main
+    DRAMUtils::DRAMUtils
+)
+
+gtest_discover_tests(tests_memspec
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)

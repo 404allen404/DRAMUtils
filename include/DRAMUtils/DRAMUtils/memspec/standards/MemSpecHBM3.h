@@ -57,6 +57,7 @@ struct MemArchitectureSpecTypeHBM3
     uint64_t nbrOfDevices;
     uint64_t nbrOfBanks;
     uint64_t nbrOfBankGroups;
+    uint64_t nbrOfStacks;
     uint64_t RAAIMT;
     uint64_t RAAMMT;
     uint64_t RAADEC;

@@ -20,6 +20,7 @@
 			"name": "dev-mode",
 			"hidden": true,
 			"inherits": "cmake-pedantic",
+            "binaryDir": "${sourceDir}/build",
 			"cacheVariables": {
 				"DRAMUTILS_BUILD_TESTS": "ON",
 				"CMAKE_BUILD_PARALLEL_LEVEL": ""
