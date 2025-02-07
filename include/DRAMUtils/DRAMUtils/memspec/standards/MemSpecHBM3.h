@@ -38,6 +38,8 @@
 
 #include <string_view>
 #include <string>
+#include <optional>
+
 #include "DRAMUtils/util/json_utils.h"
 
 #include "DRAMUtils/memspec/BaseMemSpec.h"
@@ -62,7 +64,7 @@ struct MemArchitectureSpecTypeHBM3
     uint64_t RAAMMT;
     uint64_t RAADEC;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeHBM3, nbrOfRows, nbrOfColumns, burstLength, maxBurstLength, dataRate, width, nbrOfChannels, nbrOfPseudoChannels, nbrOfDevices, nbrOfBanks, nbrOfBankGroups, RAAIMT, RAAMMT, RAADEC)
+NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeHBM3, nbrOfRows, nbrOfColumns, burstLength, maxBurstLength, dataRate, width, nbrOfChannels, nbrOfPseudoChannels, nbrOfDevices, nbrOfBanks, nbrOfBankGroups, nbrOfStacks, RAAIMT, RAAMMT, RAADEC)
 
 struct MemTimingSpecTypeHBM3
 {
