@@ -88,6 +88,12 @@ private:
     }
 
 public:
+    // Default constructor
+    IdVariant() = default;
+
+    // copy/move constructors
+    IdVariant(const IdVariant&) = default;
+    IdVariant(IdVariant&&) noexcept = default;
     // Compile time check for MemSpec type
     template<typename T>
     void setVariant(T&& variant) {
