@@ -41,10 +41,12 @@
 #include "json.h"
 
 #include "id_variant.h"
+#include "collapsingvector.h"
 
 #include <optional>
 #include <variant>
 #include <string>
+#include <string_view>
 
 
 
@@ -68,6 +70,32 @@ template <typename... Ts>
 void variant_to_json(json_t& j, const std::variant<Ts...> &data)
 {
     std::visit([&j](const auto& v) { j = v; }, data);
+}
+
+
+template <typename T>
+void collapsingvector_to_json(json_t& j, const CollapsingVector<T>& data, std::optional<std::string_view> key)
+{
+    if (key) {
+        data.to_json(j[*key]);
+    } else {
+        data.to_json(j);
+    }
+}
+
+template <typename T>
+void collapsing_from_json(const json_t& j, CollapsingVector<T>& data, std::optional<std::string_view> key)
+{
+    if (key) {
+        const auto it = j.find(*key);
+        if (it == j.end()) {
+            // Key not in json
+            throw std::runtime_error("Key " + std::string(*key) + " not found in json");
+        }
+        data.from_json(*it);
+    } else {
+        data.from_json(j);
+    }
 }
 
 
@@ -149,6 +177,11 @@ constexpr bool is_id_variant = false;
 template <char const * id_field_name, typename Seq>
 constexpr bool is_id_variant<IdVariant<id_field_name, Seq>> = true;
 
+template <typename>
+constexpr bool is_collapsing_vector = false;
+template <typename T>
+constexpr bool is_collapsing_vector<CollapsingVector<T>> = true;
+
 
 template <typename T> void extended_to_json(const char* key, json_t& j, const T& value)
 {
@@ -156,6 +189,8 @@ template <typename T> void extended_to_json(const char* key, json_t& j, const T&
         optional_to_json(j, value, key);
     else if constexpr (is_id_variant<T>)
         id_variant_to_json(j, value, key);
+    else if constexpr (is_collapsing_vector<T>)
+        collapsingvector_to_json(j, value, key);
     else if constexpr (is_variant<T>)
         variant_to_json(j, value);
     else
@@ -168,6 +203,8 @@ template <typename T> void extended_from_json(const char* key, const json_t& j, 
         optional_from_json(j, value, key);
     else if constexpr (is_id_variant<T>)
         id_variant_from_json(j, value, key);
+    else if constexpr (is_collapsing_vector<T>)
+        collapsing_from_json(j, value, key);
     else if constexpr (is_variant<T>)
         variant_from_json<T>(j, value);
     else
@@ -216,6 +253,20 @@ template <typename... Ts> struct adl_serializer<std::variant<Ts...>>
     {
         // Call variant_from_json for all types, only one will succeed
         (DRAMUtils::util::variant_from_json<Ts>(j, data), ...);
+    }
+};
+
+
+template <typename T> struct adl_serializer<DRAMUtils::util::CollapsingVector<T>>
+{
+    static void to_json(json_t& j, const DRAMUtils::util::CollapsingVector<T>& data)
+    {
+        DRAMUtils::util::collapsingvector_to_json<T>(j, data, std::nullopt);
+    }
+
+    static void from_json(const json_t& j, DRAMUtils::util::CollapsingVector<T>& data)
+    {
+        (DRAMUtils::util::collapsing_from_json<T>(j, data, std::nullopt));
     }
 };
 
