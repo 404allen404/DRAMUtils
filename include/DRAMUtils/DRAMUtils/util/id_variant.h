@@ -88,6 +88,23 @@ private:
     }
 
 public:
+    // Default constructor
+    IdVariant() = default;
+
+    // copy/move constructors
+    IdVariant(const IdVariant&) = default;
+    IdVariant(IdVariant&&) noexcept = default;
+
+    // copy/move assignment
+    IdVariant& operator=(const IdVariant&) = default;
+    IdVariant& operator=(IdVariant&&) noexcept = default;
+
+    // Explicit forward constructor
+    template <typename T, typename = std::enable_if_t<!std::is_same_v<std::decay_t<T>, IdVariant> || std::is_lvalue_reference_v<T>>>
+    explicit IdVariant(T&& variant) {
+        setVariant(std::forward<T>(variant));
+    }
+
     // Compile time check for MemSpec type
     template<typename T>
     void setVariant(T&& variant) {
