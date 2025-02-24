@@ -57,8 +57,9 @@ struct MemArchitectureSpecTypeHBM2
     uint64_t nbrOfDevices;
     uint64_t nbrOfBanks;
     uint64_t nbrOfBankGroups;
+    uint64_t nbrOfStacks;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeHBM2, nbrOfRows, nbrOfColumns, burstLength, maxBurstLength, dataRate, width, nbrOfChannels, nbrOfPseudoChannels, nbrOfDevices, nbrOfBanks, nbrOfBankGroups)
+NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeHBM2, nbrOfRows, nbrOfColumns, burstLength, maxBurstLength, dataRate, width, nbrOfChannels, nbrOfPseudoChannels, nbrOfDevices, nbrOfBanks, nbrOfBankGroups, nbrOfStacks)
 
 struct MemTimingSpecTypeHBM2
 {
