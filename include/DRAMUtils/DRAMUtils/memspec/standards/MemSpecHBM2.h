@@ -71,6 +71,7 @@ struct MemTimingSpecTypeHBM2
     uint64_t    RCDWR;
     uint64_t    RRDL;
     uint64_t    RRDS;
+    uint64_t    CCDR;
     uint64_t    FAW;
     uint64_t    RTP;
     uint64_t    RP;
@@ -92,7 +93,7 @@ struct MemTimingSpecTypeHBM2
     uint64_t    REFI;
     uint64_t    REFISB;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeHBM2, tCK, DQSCK, RC, RAS, RCDRD, RCDWR, RRDL, RRDS, FAW, RTP, RP, RL, WL, PL, WR, CCDL, CCDS, WTRL, WTRS, RTW, XP, CKE, XS, RFC, RFCSB, RREFD, REFI, REFISB)
+NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeHBM2, tCK, DQSCK, RC, RAS, RCDRD, RCDWR, RRDL, RRDS, CCDR, FAW, RTP, RP, RL, WL, PL, WR, CCDL, CCDS, WTRL, WTRS, RTW, XP, CKE, XS, RFC, RFCSB, RREFD, REFI, REFISB)
 
 struct MemSpecHBM2 : BaseMemSpec
 {
