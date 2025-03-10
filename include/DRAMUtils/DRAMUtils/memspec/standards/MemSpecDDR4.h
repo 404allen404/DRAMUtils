@@ -45,6 +45,20 @@
 
 namespace DRAMUtils::MemSpec {
 
+enum class RefModeTypeDDR4
+{
+    INVALID = -1,
+    REF_MODE_1 = 1,
+    REF_MODE_2 = 2,
+    REF_MODE_4 = 4
+};
+NLOHMANN_JSON_SERIALIZE_ENUM(RefModeTypeDDR4, {
+    {RefModeTypeDDR4::INVALID, nullptr},
+    {RefModeTypeDDR4::REF_MODE_1, 1},
+    {RefModeTypeDDR4::REF_MODE_2, 2},
+    {RefModeTypeDDR4::REF_MODE_4, 4},
+})
+
 struct MemArchitectureSpecTypeDDR4
 {
     uint64_t nbrOfChannels;
@@ -57,7 +71,7 @@ struct MemArchitectureSpecTypeDDR4
     uint64_t burstLength;
     uint64_t dataRate;
     uint64_t width;
-    uint64_t RefMode;
+    RefModeTypeDDR4 RefMode;
     std::optional<uint64_t> maxBurstLength;
 };
 NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeDDR4, nbrOfChannels, nbrOfDevices, nbrOfRanks, nbrOfBanks, nbrOfBankGroups, nbrOfRows, nbrOfColumns, burstLength, dataRate, width, RefMode, maxBurstLength)
@@ -78,11 +92,10 @@ struct MemTimingSpecTypeDDR4
     uint64_t    WR;
     uint64_t    XP;
     uint64_t    XS;
-    uint64_t    REFM;
     uint64_t    REFI;
-    uint64_t    RFC1;
-    uint64_t    RFC2;
-    uint64_t    RFC4;
+    uint64_t    RFC1; // RefModeTypeDDR4::REF_MODE_1 || RefModeTypeDDR4::INVALID
+    uint64_t    RFC2; // RefModeTypeDDR4::REF_MODE_2
+    uint64_t    RFC4; // RefModeTypeDDR4::REF_MODE_4
     uint64_t    RP;
     uint64_t    DQSCK;
     uint64_t    CCD_S;
@@ -100,7 +113,7 @@ struct MemTimingSpecTypeDDR4
     uint64_t    REFPDEN;
     uint64_t    RTRS;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeDDR4, tCK, CKE, CKESR, RAS, RC, RCD, RL, RPRE, RTP, WL, WPRE, WR, XP, XS, REFM, REFI, RFC1, RFC2, RFC4, RP, DQSCK, CCD_S, CCD_L, FAW, RRD_S, RRD_L, WTR_S, WTR_L, XPDLL, XSDLL, AL, ACTPDEN, PRPDEN, REFPDEN, RTRS)
+NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeDDR4, tCK, CKE, CKESR, RAS, RC, RCD, RL, RPRE, RTP, WL, WPRE, WR, XP, XS, REFI, RFC1, RFC2, RFC4, RP, DQSCK, CCD_S, CCD_L, FAW, RRD_S, RRD_L, WTR_S, WTR_L, XPDLL, XSDLL, AL, ACTPDEN, PRPDEN, REFPDEN, RTRS)
 
 struct MemPowerSpecTypeDDR4
 {
@@ -124,15 +137,15 @@ struct MemPowerSpecTypeDDR4
     double ipp2p;
     double ipp3p;
     
-    // MemArchitectureSpecTypeDDR4::RefMode==1
+    // RefModeTypeDDR4::REF_MODE_1 || RefModeTypeDDR4::INVALID
     double idd5B;
     double ipp5B;
     
-    // MemArchitectureSpecTypeDDR4::RefMode==2
+    // RefModeTypeDDR4::REF_MODE_2
     double idd5F2;
     double ipp5F2;
     
-    // MemArchitectureSpecTypeDDR4::RefMode==4
+    // RefModeTypeDDR4::REF_MODE_4
     double idd5F4;
     double ipp5F4;
 
