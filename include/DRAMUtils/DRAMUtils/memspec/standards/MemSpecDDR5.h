@@ -44,6 +44,18 @@
 
 namespace DRAMUtils::MemSpec {
 
+enum class RefModeTypeDDR5
+{
+    INVALID = -1,
+    REF_MODE_1 = 1,
+    REF_MODE_2 = 2,
+};
+NLOHMANN_JSON_SERIALIZE_ENUM(RefModeTypeDDR5, {
+    {RefModeTypeDDR5::INVALID, nullptr},
+    {RefModeTypeDDR5::REF_MODE_1, 1},
+    {RefModeTypeDDR5::REF_MODE_2, 2},
+})
+
 struct MemArchitectureSpecTypeDDR5
 {
     uint64_t nbrOfChannels;
@@ -59,7 +71,7 @@ struct MemArchitectureSpecTypeDDR5
     uint64_t burstLength;
     uint64_t dataRate;
     uint64_t width;
-    uint64_t RefMode;
+    RefModeTypeDDR5 RefMode;
     std::optional<uint64_t> maxBurstLength;
 
     uint64_t cmdMode;
@@ -105,12 +117,12 @@ struct MemTimingSpecTypeDDR5
     uint64_t    WTR_L;
     uint64_t    WTR_M;
     uint64_t    WTR_S;
-    uint64_t    RFC1_slr; // MemArchitectureSpecTypeDDR5::RefMode == 1
-    uint64_t    RFC2_slr; // MemArchitectureSpecTypeDDR5::RefMode == 2
-    uint64_t    RFC1_dlr; // MemArchitectureSpecTypeDDR5::RefMode == 1
-    uint64_t    RFC2_dlr; // MemArchitectureSpecTypeDDR5::RefMode == 2
-    uint64_t    RFC1_dpr; // MemArchitectureSpecTypeDDR5::RefMode == 1
-    uint64_t    RFC2_dpr; // MemArchitectureSpecTypeDDR5::RefMode == 2
+    uint64_t    RFC1_slr; // RefModeTypeDDR5::REF_MODE_1
+    uint64_t    RFC2_slr; // RefModeTypeDDR5::REF_MODE_2
+    uint64_t    RFC1_dlr; // RefModeTypeDDR5::REF_MODE_1
+    uint64_t    RFC2_dlr; // RefModeTypeDDR5::REF_MODE_2
+    uint64_t    RFC1_dpr; // RefModeTypeDDR5::REF_MODE_1
+    uint64_t    RFC2_dpr; // RefModeTypeDDR5::REF_MODE_2
     uint64_t    RFCsb_slr;
     uint64_t    RFCsb_dlr;
     uint64_t    REFI1;
@@ -152,11 +164,11 @@ struct MemPowerSpecTypeDDR5
     double ipp2p;
     double ipp3p;
 
-    double idd5b; // MemArchitectureSpecTypeDDR5::RefMode == 1
-    double idd5f; // MemArchitectureSpecTypeDDR5::RefMode == 2
+    double idd5b; // RefModeTypeDDR5::REF_MODE_1
+    double idd5f; // RefModeTypeDDR5::REF_MODE_2
 
-    double ipp5b; // MemArchitectureSpecTypeDDR5::RefMode == 1
-    double ipp5f; // MemArchitectureSpecTypeDDR5::RefMode == 2
+    double ipp5b; // RefModeTypeDDR5::REF_MODE_1
+    double ipp5f; // RefModeTypeDDR5::REF_MODE_2
 
     double vddq;
 
