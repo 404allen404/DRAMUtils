@@ -39,7 +39,6 @@
 #include <string_view>
 #include <string>
 #include <optional>
-#include <vector>
 #include "DRAMUtils/util/json_utils.h"
 
 #include "DRAMUtils/memspec/BaseMemSpec.h"
@@ -62,30 +61,11 @@ struct MemArchitectureSpecTypeLPDDR4
 };
 NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeLPDDR4, nbrOfChannels, nbrOfDevices, nbrOfRanks, nbrOfBanks, nbrOfBankGroups, nbrOfRows, nbrOfColumns, burstLength, dataRate, width, maxBurstLength)
 
-struct MemDynamicPowerCapcitancePairType {
-    double capacity;
-    double swing;
-};
-NLOHMANN_JSONIFY_ALL_THINGS(MemDynamicPowerCapcitancePairType, capacity, swing)
-
-enum class TerminationScheme {
-    PODL = 0,
-    LWSTL = 1,
-    PUSH_PULL = 2,
-    UNTERMINATED = 3,
-    Invalid = -1
-};
-NLOHMANN_JSON_SERIALIZE_ENUM(TerminationScheme,
-                             {{TerminationScheme::Invalid, nullptr},
-                              {TerminationScheme::PODL, "PODL"},
-                              {TerminationScheme::LWSTL, "LWSTL"},
-                              {TerminationScheme::PUSH_PULL, "PP"},
-                              {TerminationScheme::UNTERMINATED, "UNTERMINATED"}})
 
 struct MemStaticPowerType {
     double R_ON;
     double R_TT;
-    TerminationScheme termination;
+    MemImpedanceTerminationScheme termination;
 };
 NLOHMANN_JSONIFY_ALL_THINGS(MemStaticPowerType, R_ON, R_TT, termination)
 
