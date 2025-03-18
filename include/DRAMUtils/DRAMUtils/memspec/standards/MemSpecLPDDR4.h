@@ -62,13 +62,6 @@ struct MemArchitectureSpecTypeLPDDR4
 NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeLPDDR4, nbrOfChannels, nbrOfDevices, nbrOfRanks, nbrOfBanks, nbrOfBankGroups, nbrOfRows, nbrOfColumns, burstLength, dataRate, width, maxBurstLength)
 
 
-struct MemStaticPowerType {
-    double R_ON;
-    double R_TT;
-    MemImpedanceTerminationScheme termination;
-};
-NLOHMANN_JSONIFY_ALL_THINGS(MemStaticPowerType, R_ON, R_TT, termination)
-
 struct MemImpedanceSpecTypeLPDDR4 {
     double dynamicEnergy_ck;
     double dynamicEnergy_cb;
@@ -76,11 +69,11 @@ struct MemImpedanceSpecTypeLPDDR4 {
     double dynamicEnergy_wb;
     double dynamicEnergy_dqs;
 
-    MemStaticPowerType static_ck;
-    MemStaticPowerType static_cb;
-    MemStaticPowerType static_rb;
-    MemStaticPowerType static_wb;
-    MemStaticPowerType static_dqs;
+    MemImpedanceStaticPowerType static_ck;
+    MemImpedanceStaticPowerType static_cb;
+    MemImpedanceStaticPowerType static_rb;
+    MemImpedanceStaticPowerType static_wb;
+    MemImpedanceStaticPowerType static_dqs;
 };
 NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR4, dynamicEnergy_ck, dynamicEnergy_cb, dynamicEnergy_rb, dynamicEnergy_wb, dynamicEnergy_dqs, static_ck, static_cb, static_rb, static_wb, static_dqs)
 

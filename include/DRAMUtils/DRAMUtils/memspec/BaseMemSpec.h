@@ -50,12 +50,12 @@ NLOHMANN_JSON_SERIALIZE_ENUM(MemImpedanceTerminationScheme,
                               {MemImpedanceTerminationScheme::PUSH_PULL, "PP"},
                               {MemImpedanceTerminationScheme::UNTERMINATED, "UNTERMINATED"}})
 
-struct MemStaticPowerType {
+struct MemImpedanceStaticPowerType {
     double R_ON;
     double R_TT;
     MemImpedanceTerminationScheme termination;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemStaticPowerType, R_ON, R_TT, termination)
+NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceStaticPowerType, R_ON, R_TT, termination)
 
 struct BaseMemSpec
 {
