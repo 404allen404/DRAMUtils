@@ -36,6 +36,8 @@
 #ifndef DRAMUTILS_MEMSPEC_BASEMEMSPEC_H
 #define DRAMUTILS_MEMSPEC_BASEMEMSPEC_H
 
+namespace DRAMUtils::MemSpec {
+
 enum class MemImpedanceTerminationScheme {
     PODL = 0,
     LWSTL = 1,
@@ -61,5 +63,7 @@ struct BaseMemSpec
 {
     //std::string memoryType;
 };
+
+} // namespace DRAMUtils::MemSpec
 
 #endif /* DRAMUTILS_MEMSPEC_BASEMEMSPEC_H */
