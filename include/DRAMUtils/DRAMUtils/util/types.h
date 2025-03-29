@@ -61,6 +61,22 @@ struct is_one_of<T, type_sequence<Ts...>> :
     std::bool_constant<(std::is_same_v<T, Ts> || ...)>
 {};
 
+// Helper struct to check if types in a sequence are unique
+// forward declaration
+template <typename... Ts>
+struct unique_types : std::true_type {}; // empty case
+// specialization
+template <typename First, typename... Ts>
+struct unique_types<First, Ts...> :
+    std::bool_constant<
+        (sizeof...(Ts) == 0) || // single type case
+        !(std::is_same_v<First, Ts> || ...) && // check if First is not in Ts...
+        unique_types<Ts...>::value // recursive check
+    >
+{};
+template <typename... Ts>
+struct unique_types<type_sequence<Ts...>> : unique_types<Ts...> {};
+
 // Helper
 // Default case
 template <typename T, typename = void>
