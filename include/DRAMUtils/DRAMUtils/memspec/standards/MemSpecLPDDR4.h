@@ -61,21 +61,36 @@ struct MemArchitectureSpecTypeLPDDR4
 };
 NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeLPDDR4, nbrOfChannels, nbrOfDevices, nbrOfRanks, nbrOfBanks, nbrOfBankGroups, nbrOfRows, nbrOfColumns, burstLength, dataRate, width, maxBurstLength)
 
-
 struct MemImpedanceSpecTypeLPDDR4 {
-    double dynamicEnergy_ck;
-    double dynamicEnergy_cb;
-    double dynamicEnergy_rb;
-    double dynamicEnergy_wb;
-    double dynamicEnergy_dqs;
+    // Clock
+    bool ck_termination;
+    double ck_R_eq;
+    double ck_dyn_E;
 
-    MemImpedanceStaticPowerType static_ck;
-    MemImpedanceStaticPowerType static_cb;
-    MemImpedanceStaticPowerType static_rb;
-    MemImpedanceStaticPowerType static_wb;
-    MemImpedanceStaticPowerType static_dqs;
+    // Commandbus
+    bool cb_termination;
+    double cb_R_eq;
+    double cb_dyn_E;
+
+    // Data bus read
+    bool rb_termination;
+    double rb_R_eq;
+    double rb_dyn_E;
+    // Data bus write
+    bool wb_termination;
+    double wb_R_eq;
+    double wb_dyn_E;
+
+    // DQS read
+    bool rdqs_termination;
+    double rdqs_R_eq;
+    double rdqs_dyn_E;
+    // DQS write
+    bool wdqs_termination;
+    double wdqs_R_eq;
+    double wdqs_dyn_E;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR4, dynamicEnergy_ck, dynamicEnergy_cb, dynamicEnergy_rb, dynamicEnergy_wb, dynamicEnergy_dqs, static_ck, static_cb, static_rb, static_wb, static_dqs)
+NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR4, ck_termination, ck_R_eq, ck_dyn_E, cb_termination, cb_R_eq, cb_dyn_E, rb_termination, rb_R_eq, rb_dyn_E, wb_termination, wb_R_eq, wb_dyn_E, rdqs_termination, rdqs_R_eq, rdqs_dyn_E, wdqs_termination, wdqs_R_eq, wdqs_dyn_E)
 
 struct MemTimingSpecTypeLPDDR4
 {

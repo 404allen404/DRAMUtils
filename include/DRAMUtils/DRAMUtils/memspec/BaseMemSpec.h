@@ -38,27 +38,6 @@
 
 namespace DRAMUtils::MemSpec {
 
-enum class MemImpedanceTerminationScheme {
-    PODL = 0,
-    LWSTL = 1,
-    PUSH_PULL = 2,
-    UNTERMINATED = 3,
-    Invalid = -1
-};
-NLOHMANN_JSON_SERIALIZE_ENUM(MemImpedanceTerminationScheme,
-                             {{MemImpedanceTerminationScheme::Invalid, nullptr},
-                              {MemImpedanceTerminationScheme::PODL, "PODL"},
-                              {MemImpedanceTerminationScheme::LWSTL, "LWSTL"},
-                              {MemImpedanceTerminationScheme::PUSH_PULL, "PP"},
-                              {MemImpedanceTerminationScheme::UNTERMINATED, "UNTERMINATED"}})
-
-struct MemImpedanceStaticPowerType {
-    double R_ON;
-    double R_TT;
-    MemImpedanceTerminationScheme termination;
-};
-NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceStaticPowerType, R_ON, R_TT, termination)
-
 struct BaseMemSpec
 {
     //std::string memoryType;
