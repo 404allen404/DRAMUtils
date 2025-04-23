@@ -36,11 +36,13 @@
 #ifndef DRAMUTILS_MEMSPEC_BASEMEMSPEC_H
 #define DRAMUTILS_MEMSPEC_BASEMEMSPEC_H
 
-#include <string_view>
+namespace DRAMUtils::MemSpec {
 
 struct BaseMemSpec
 {
     //std::string memoryType;
 };
+
+} // namespace DRAMUtils::MemSpec
 
 #endif /* DRAMUTILS_MEMSPEC_BASEMEMSPEC_H */

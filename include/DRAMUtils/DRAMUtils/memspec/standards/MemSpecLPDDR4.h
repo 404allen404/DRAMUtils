@@ -62,19 +62,35 @@ struct MemArchitectureSpecTypeLPDDR4
 NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeLPDDR4, nbrOfChannels, nbrOfDevices, nbrOfRanks, nbrOfBanks, nbrOfBankGroups, nbrOfRows, nbrOfColumns, burstLength, dataRate, width, maxBurstLength)
 
 struct MemImpedanceSpecTypeLPDDR4 {
-    double C_total_ck;
-    double C_total_cb;
-    double C_total_rb;
-    double C_total_wb;
-    double C_total_dqs;
+    // Clock
+    bool ck_termination;
+    double ck_R_eq;
+    double ck_dyn_E;
 
-    double R_eq_ck;
-    double R_eq_cb;
-    double R_eq_rb;
-    double R_eq_wb;
-    double R_eq_dqs;
+    // Commandbus
+    bool cb_termination;
+    double cb_R_eq;
+    double cb_dyn_E;
+
+    // Data bus read
+    bool rb_termination;
+    double rb_R_eq;
+    double rb_dyn_E;
+    // Data bus write
+    bool wb_termination;
+    double wb_R_eq;
+    double wb_dyn_E;
+
+    // DQS read
+    bool rdqs_termination;
+    double rdqs_R_eq;
+    double rdqs_dyn_E;
+    // DQS write
+    bool wdqs_termination;
+    double wdqs_R_eq;
+    double wdqs_dyn_E;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR4, C_total_ck, C_total_cb, C_total_rb, C_total_wb, C_total_dqs, R_eq_ck, R_eq_cb, R_eq_rb, R_eq_wb, R_eq_dqs)
+NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR4, ck_termination, ck_R_eq, ck_dyn_E, cb_termination, cb_R_eq, cb_dyn_E, rb_termination, rb_R_eq, rb_dyn_E, wb_termination, wb_R_eq, wb_dyn_E, rdqs_termination, rdqs_R_eq, rdqs_dyn_E, wdqs_termination, wdqs_R_eq, wdqs_dyn_E)
 
 struct MemTimingSpecTypeLPDDR4
 {
