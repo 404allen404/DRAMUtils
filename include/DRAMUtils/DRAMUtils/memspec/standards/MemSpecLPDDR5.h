@@ -65,21 +65,35 @@ NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeLPDDR5, nbrOfDevices, nbrOfCh
 
 struct MemImpedanceSpecTypeLPDDR5
 {
-    double C_total_cb;
-    double C_total_ck;
-    double C_total_wck;
-    double C_total_dqs;
-    double C_total_rb;
-    double C_total_wb;
+    // Clock
+    bool ck_termination;
+    double ck_R_eq;
+    double ck_dyn_E;
 
-    double R_eq_cb;
-    double R_eq_ck;
-    double R_eq_wck;
-    double R_eq_dqs;
-    double R_eq_rb;
-    double R_eq_wb;
+    // Commandbus
+    bool cb_termination;
+    double cb_R_eq;
+    double cb_dyn_E;
+
+    // Data bus read
+    bool rb_termination;
+    double rb_R_eq;
+    double rb_dyn_E;
+    // Data bus write
+    bool wb_termination;
+    double wb_R_eq;
+    double wb_dyn_E;
+
+    // DQS read
+    bool rdqs_termination;
+    double rdqs_R_eq;
+    double rdqs_dyn_E;
+    // WCK
+    bool wck_termination;
+    double wck_R_eq;
+    double wck_dyn_E;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR5, C_total_cb, C_total_ck, C_total_wck, C_total_dqs, C_total_rb, C_total_wb, R_eq_cb, R_eq_ck, R_eq_wck, R_eq_dqs, R_eq_rb, R_eq_wb)
+NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR5, ck_termination, ck_R_eq, ck_dyn_E, cb_termination, cb_R_eq, cb_dyn_E, rb_termination, rb_R_eq, rb_dyn_E, wb_termination, wb_R_eq, wb_dyn_E, rdqs_termination, rdqs_R_eq, rdqs_dyn_E, wck_termination, wck_R_eq, wck_dyn_E)
 
 struct MemTimingSpecTypeLPDDR5
 {
