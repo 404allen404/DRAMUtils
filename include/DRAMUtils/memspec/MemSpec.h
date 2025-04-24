@@ -53,6 +53,7 @@
 #include "standards/MemSpecDDR5.h"
 #include "standards/MemSpecLPDDR4.h"
 #include "standards/MemSpecLPDDR5.h"
+#include "standards/MemSpecLPDDR6.h"
 #include "standards/MemSpecWideIO.h"
 #include "standards/MemSpecWideIO2.h"
 #include "standards/MemSpecGDDR5.h"
@@ -73,6 +74,7 @@ using VariantTypes = util::type_sequence<
     MemSpecDDR5,
     MemSpecLPDDR4,
     MemSpecLPDDR5,
+    MemSpecLPDDR6,
     MemSpecWideIO,
     MemSpecWideIO2,
     MemSpecGDDR5,
