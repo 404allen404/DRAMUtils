@@ -68,18 +68,18 @@ struct MemImpedanceSpecTypeLPDDR4 {
     double ck_dyn_E;
 
     // Commandbus
-    bool cb_termination;
-    double cb_R_eq;
-    double cb_dyn_E;
+    bool ca_termination;
+    double ca_R_eq;
+    double ca_dyn_E;
 
     // Data bus read
-    bool rb_termination;
-    double rb_R_eq;
-    double rb_dyn_E;
+    bool rdq_termination;
+    double rdq_R_eq;
+    double rdq_dyn_E;
     // Data bus write
-    bool wb_termination;
-    double wb_R_eq;
-    double wb_dyn_E;
+    bool wdq_termination;
+    double wdq_R_eq;
+    double wdq_dyn_E;
 
     // DQS read
     bool rdqs_termination;
@@ -90,7 +90,7 @@ struct MemImpedanceSpecTypeLPDDR4 {
     double wdqs_R_eq;
     double wdqs_dyn_E;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR4, ck_termination, ck_R_eq, ck_dyn_E, cb_termination, cb_R_eq, cb_dyn_E, rb_termination, rb_R_eq, rb_dyn_E, wb_termination, wb_R_eq, wb_dyn_E, rdqs_termination, rdqs_R_eq, rdqs_dyn_E, wdqs_termination, wdqs_R_eq, wdqs_dyn_E)
+NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR4, ck_termination, ck_R_eq, ck_dyn_E, ca_termination, ca_R_eq, ca_dyn_E, rdq_termination, rdq_R_eq, rdq_dyn_E, wdq_termination, wdq_R_eq, wdq_dyn_E, rdqs_termination, rdqs_R_eq, rdqs_dyn_E, wdqs_termination, wdqs_R_eq, wdqs_dyn_E)
 
 struct MemTimingSpecTypeLPDDR4
 {
