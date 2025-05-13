@@ -60,6 +60,7 @@
 #include "standards/MemSpecGDDR6.h"
 #include "standards/MemSpecHBM2.h"
 #include "standards/MemSpecHBM3.h"
+#include "standards/MemSpecHBM4.h"
 #include "standards/MemSpecSTTMRAM.h"
 
 namespace DRAMUtils::MemSpec
@@ -79,6 +80,7 @@ using VariantTypes = util::type_sequence<
     MemSpecGDDR6,
     MemSpecHBM2,
     MemSpecHBM3,
+    MemSpecHBM4,
     MemSpecSTTMRAM
 >;
 
