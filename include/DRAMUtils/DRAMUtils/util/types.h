@@ -70,8 +70,8 @@ template <typename First, typename... Ts>
 struct unique_types<First, Ts...> :
     std::bool_constant<
         (sizeof...(Ts) == 0) || // single type case
-        !(std::is_same_v<First, Ts> || ...) && // check if First is not in Ts...
-        unique_types<Ts...>::value // recursive check
+        (!(std::is_same_v<First, Ts> || ...) && // check if First is not in Ts...
+        unique_types<Ts...>::value) // recursive check
     >
 {};
 template <typename... Ts>
