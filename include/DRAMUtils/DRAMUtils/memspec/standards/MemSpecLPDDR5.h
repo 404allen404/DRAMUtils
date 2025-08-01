@@ -92,8 +92,17 @@ struct MemImpedanceSpecTypeLPDDR5
     bool wck_termination;
     double wck_R_eq;
     double wck_dyn_E;
+
+    // DBI read
+    bool rdbi_termination;
+    double rdbi_R_eq;
+    double rdbi_dyn_E;
+    // DBI write
+    bool wdbi_termination;
+    double wdbi_R_eq;
+    double wdbi_dyn_E;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR5, ck_termination, ck_R_eq, ck_dyn_E, ca_termination, ca_R_eq, ca_dyn_E, rdq_termination, rdq_R_eq, rdq_dyn_E, wdq_termination, wdq_R_eq, wdq_dyn_E, rdqs_termination, rdqs_R_eq, rdqs_dyn_E, wck_termination, wck_R_eq, wck_dyn_E)
+NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR5, ck_termination, ck_R_eq, ck_dyn_E, ca_termination, ca_R_eq, ca_dyn_E, rdq_termination, rdq_R_eq, rdq_dyn_E, wdq_termination, wdq_R_eq, wdq_dyn_E, rdqs_termination, rdqs_R_eq, rdqs_dyn_E, wck_termination, wck_R_eq, wck_dyn_E, rdbi_termination, rdbi_R_eq, rdbi_dyn_E, wdbi_termination, wdbi_R_eq, wdbi_dyn_E)
 
 struct MemTimingSpecTypeLPDDR5
 {
