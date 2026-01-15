@@ -76,7 +76,7 @@ set(DRAMUTILS_LIBRARY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 set(DRAMUTILS_TEST_DIR    "${CMAKE_CURRENT_SOURCE_DIR}/tests")
 
 ### Build options ###
-option(DRAMUTILS_BUILD_TESTS "Build DRAMUtils unit tests" OFF)
+option(DRAMUTILS_BUILD_TESTS "Build DRAMUtils unit tests" ${PROJECT_IS_TOP_LEVEL})
 
 
 ### Compiler optimization settings ###
