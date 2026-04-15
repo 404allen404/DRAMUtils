@@ -24,6 +24,7 @@ FILES
     DRAMUtils/memspec/standards/MemSpecHBM4.h
     DRAMUtils/memspec/standards/MemSpecLPDDR4.h
     DRAMUtils/memspec/standards/MemSpecLPDDR5.h
+    DRAMUtils/memspec/standards/MemSpecLPDDR6.h
     DRAMUtils/memspec/standards/MemSpecSTTMRAM.h
     DRAMUtils/memspec/standards/MemSpecWideIO.h
     DRAMUtils/memspec/standards/MemSpecWideIO2.h
