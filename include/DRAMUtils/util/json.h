@@ -36,7 +36,6 @@
 #ifndef DRAMUTILS_UTIL_JSON_H
 #define DRAMUTILS_UTIL_JSON_H
 
-#define JSON_DIAGNOSTICS 1
 #include "nlohmann/json.hpp"
 
 using json_t = nlohmann::json;
