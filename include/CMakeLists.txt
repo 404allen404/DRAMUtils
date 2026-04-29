@@ -19,8 +19,7 @@ FILES
     DRAMUtils/memspec/standards/MemSpecGDDR5X.h
     DRAMUtils/memspec/standards/MemSpecGDDR6.h
     DRAMUtils/memspec/standards/MemSpecHBM2.h
-    DRAMUtils/memspec/standards/MemSpecHBM3.h
-    DRAMUtils/memspec/standards/MemSpecHBM4.h
+    DRAMUtils/memspec/standards/MemSpecHBM3_4.h
     DRAMUtils/memspec/standards/MemSpecLPDDR4.h
     DRAMUtils/memspec/standards/MemSpecLPDDR5.h
     DRAMUtils/memspec/standards/MemSpecLPDDR6.h

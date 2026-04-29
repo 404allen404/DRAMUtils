@@ -33,8 +33,8 @@
  *    Marco Mörz
  */
 
-#ifndef DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECHBM3_H
-#define DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECHBM3_H
+#ifndef DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECHBM3_4_H
+#define DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECHBM3_4_H
 
 #include <string_view>
 #include <string>
@@ -45,7 +45,7 @@
 
 namespace DRAMUtils::MemSpec {
 
-struct MemArchitectureSpecTypeHBM3
+struct MemArchitectureSpecTypeHBM3_4
 {
     uint64_t nbrOfRows;
     uint64_t nbrOfColumns;
@@ -63,9 +63,9 @@ struct MemArchitectureSpecTypeHBM3
     uint64_t RAAMMT;
     uint64_t RAADEC;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeHBM3, nbrOfRows, nbrOfColumns, burstLength, maxBurstLength, dataRate, width, nbrOfChannels, nbrOfPseudoChannels, nbrOfDevices, nbrOfBanks, nbrOfBankGroups, nbrOfStacks, RAAIMT, RAAMMT, RAADEC)
+NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeHBM3_4, nbrOfRows, nbrOfColumns, burstLength, maxBurstLength, dataRate, width, nbrOfChannels, nbrOfPseudoChannels, nbrOfDevices, nbrOfBanks, nbrOfBankGroups, nbrOfStacks, RAAIMT, RAAMMT, RAADEC)
 
-struct MemTimingSpecTypeHBM3
+struct MemTimingSpecTypeHBM3_4
 {
     double      tCK;
     uint64_t    DQSCK;
@@ -98,19 +98,30 @@ struct MemTimingSpecTypeHBM3
     uint64_t    REFIPB;
     uint64_t    PPD;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeHBM3, tCK, DQSCK, RC, RAS, RCDRD, RCDWR, RRDL, RRDS, FAW, RTP, RP, RL, WL, PL, WR, CCDL, CCDS, CCDR, WTRL, WTRS, RTW, XP, CKE, XS, RFC, RFCPB, RREFD, REFI, REFIPB, PPD)
+NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeHBM3_4, tCK, DQSCK, RC, RAS, RCDRD, RCDWR, RRDL, RRDS, FAW, RTP, RP, RL, WL, PL, WR, CCDL, CCDS, CCDR, WTRL, WTRS, RTW, XP, CKE, XS, RFC, RFCPB, RREFD, REFI, REFIPB, PPD)
 
 struct MemSpecHBM3
 {
     static constexpr inline const std::string_view id = "HBM3";
     std::string memoryId;
 
-    MemArchitectureSpecTypeHBM3 memarchitecturespec;
-    MemTimingSpecTypeHBM3 memtimingspec;
+    MemArchitectureSpecTypeHBM3_4 memarchitecturespec;
+    MemTimingSpecTypeHBM3_4 memtimingspec;
 
 };
 NLOHMANN_JSONIFY_ALL_THINGS(MemSpecHBM3, memoryId, memarchitecturespec, memtimingspec)
 
+struct MemSpecHBM4
+{
+    static constexpr inline const std::string_view id = "HBM4";
+    std::string memoryId;
+
+    MemArchitectureSpecTypeHBM3_4 memarchitecturespec;
+    MemTimingSpecTypeHBM3_4 memtimingspec;
+
+};
+NLOHMANN_JSONIFY_ALL_THINGS(MemSpecHBM4, memoryId, memarchitecturespec, memtimingspec)
+
 } // namespace DRAMUtils::MemSpec
 
-#endif /* DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECHBM3_H */
+#endif /* DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECHBM3_4_H */

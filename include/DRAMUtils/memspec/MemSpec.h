@@ -60,8 +60,7 @@
 #include "standards/MemSpecGDDR5X.h"
 #include "standards/MemSpecGDDR6.h"
 #include "standards/MemSpecHBM2.h"
-#include "standards/MemSpecHBM3.h"
-#include "standards/MemSpecHBM4.h"
+#include "standards/MemSpecHBM3_4.h"
 #include "standards/MemSpecSTTMRAM.h"
 
 namespace DRAMUtils::MemSpec
