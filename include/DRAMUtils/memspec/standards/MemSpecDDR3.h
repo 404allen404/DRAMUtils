@@ -36,14 +36,14 @@
 #ifndef DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECDDR3_H
 #define DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECDDR3_H
 
-#include <string_view>
-#include <string>
 #include <optional>
+#include <string>
+#include <string_view>
 
 #include "DRAMUtils/util/json_utils.h"
 
-
-namespace DRAMUtils::MemSpec {
+namespace DRAMUtils::MemSpec
+{
 
 struct MemArchitectureSpecTypeDDR3
 {
@@ -58,39 +58,76 @@ struct MemArchitectureSpecTypeDDR3
     uint64_t nbrOfBanks;
     uint64_t nbrOfDevices;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeDDR3, nbrOfRows, nbrOfColumns, burstLength, dataRate, width, maxBurstLength, nbrOfChannels, nbrOfRanks, nbrOfBanks, nbrOfDevices)
+NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeDDR3,
+                            nbrOfRows,
+                            nbrOfColumns,
+                            burstLength,
+                            dataRate,
+                            width,
+                            maxBurstLength,
+                            nbrOfChannels,
+                            nbrOfRanks,
+                            nbrOfBanks,
+                            nbrOfDevices)
 
 struct MemTimingSpecDDR3
 {
-    double      tCK;
-    uint64_t    CKE;
-    uint64_t    CKESR;
-    uint64_t    RAS;
-    uint64_t    RC;
-    uint64_t    RCD;
-    uint64_t    RL;
-    uint64_t    RTP;
-    uint64_t    WL;
-    uint64_t    WR;
-    uint64_t    XP;
-    uint64_t    XS;
-    uint64_t    REFI;
-    uint64_t    RFC;
-    uint64_t    RP;
-    uint64_t    DQSCK;
-    uint64_t    CCD;
-    uint64_t    FAW;
-    uint64_t    RRD;
-    uint64_t    WTR;
-    uint64_t    XPDLL;
-    uint64_t    XSDLL;
-    uint64_t    AL;
-    uint64_t    ACTPDEN;
-    uint64_t    PRPDEN;
-    uint64_t    REFPDEN;
-    uint64_t    RTRS;
+    double tCK;
+    uint64_t CKE;
+    uint64_t CKESR;
+    uint64_t RAS;
+    uint64_t RC;
+    uint64_t RCD;
+    uint64_t RL;
+    uint64_t RTP;
+    uint64_t WL;
+    uint64_t WR;
+    uint64_t XP;
+    uint64_t XS;
+    uint64_t REFI;
+    uint64_t RFC;
+    uint64_t RP;
+    uint64_t DQSCK;
+    uint64_t CCD;
+    uint64_t FAW;
+    uint64_t RRD;
+    uint64_t WTR;
+    uint64_t XPDLL;
+    uint64_t XSDLL;
+    uint64_t AL;
+    uint64_t ACTPDEN;
+    uint64_t PRPDEN;
+    uint64_t REFPDEN;
+    uint64_t RTRS;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecDDR3, tCK, CKE, CKESR, RAS, RC, RCD, RL, RTP, WL, WR, XP, XS, REFI, RFC, RP, DQSCK, CCD, FAW, RRD, WTR, XPDLL, XSDLL, AL, ACTPDEN, PRPDEN, REFPDEN, RTRS)
+NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecDDR3,
+                            tCK,
+                            CKE,
+                            CKESR,
+                            RAS,
+                            RC,
+                            RCD,
+                            RL,
+                            RTP,
+                            WL,
+                            WR,
+                            XP,
+                            XS,
+                            REFI,
+                            RFC,
+                            RP,
+                            DQSCK,
+                            CCD,
+                            FAW,
+                            RRD,
+                            WTR,
+                            XPDLL,
+                            XSDLL,
+                            AL,
+                            ACTPDEN,
+                            PRPDEN,
+                            REFPDEN,
+                            RTRS)
 
 struct MemSpecDDR3
 {

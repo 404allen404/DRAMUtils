@@ -40,21 +40,19 @@
 
 #include "json.h"
 
-#include "id_variant.h"
 #include "collapsingvector.h"
+#include "id_variant.h"
 
 #include <optional>
-#include <variant>
 #include <string>
 #include <string_view>
-
-
+#include <variant>
 
 namespace DRAMUtils::util
 {
 // See https://www.kdab.com/jsonify-with-nlohmann-json/
 // Try to set the value of type T into the variant data if it fails, do nothing
-template<typename T, typename... Ts>
+template <typename T, typename... Ts>
 void variant_from_json(const json_t& j, std::variant<Ts...>& data)
 {
     try
@@ -66,52 +64,62 @@ void variant_from_json(const json_t& j, std::variant<Ts...>& data)
     }
 }
 
-template <typename... Ts>
-void variant_to_json(json_t& j, const std::variant<Ts...> &data)
+template <typename... Ts> void variant_to_json(json_t& j, const std::variant<Ts...>& data)
 {
     std::visit([&j](const auto& v) { j = v; }, data);
 }
 
-
 template <typename T>
-void collapsingvector_to_json(json_t& j, const CollapsingVector<T>& data, std::optional<std::string_view> key)
+void collapsingvector_to_json(json_t& j,
+                              const CollapsingVector<T>& data,
+                              std::optional<std::string_view> key)
 {
-    if (key) {
+    if (key)
+    {
         data.to_json(j[*key]);
-    } else {
+    }
+    else
+    {
         data.to_json(j);
     }
 }
 
 template <typename T>
-void collapsing_from_json(const json_t& j, CollapsingVector<T>& data, std::optional<std::string_view> key)
+void collapsing_from_json(const json_t& j,
+                          CollapsingVector<T>& data,
+                          std::optional<std::string_view> key)
 {
-    if (key) {
+    if (key)
+    {
         const auto it = j.find(*key);
-        if (it == j.end()) {
+        if (it == j.end())
+        {
             // Key not in json
             throw std::runtime_error("Key " + std::string(*key) + " not found in json");
         }
         data.from_json(*it);
-    } else {
+    }
+    else
+    {
         data.from_json(j);
     }
 }
 
-
 template <typename T>
 void optional_to_json(json_t& j, const std::optional<T>& data, std::optional<std::string_view> key)
 {
-    if(key && data)
+    if (key && data)
         j[*key] = *data;
-    else if(data)
+    else if (data)
         j = *data;
 }
 
 template <class T>
-void optional_from_json(const json_t& j, std::optional<T>& data, std::optional<std::string_view> key)
+void optional_from_json(const json_t& j,
+                        std::optional<T>& data,
+                        std::optional<std::string_view> key)
 {
-    if(key)
+    if (key)
     {
         const auto it = j.find(*key);
         if (it != j.end())
@@ -123,11 +131,12 @@ void optional_from_json(const json_t& j, std::optional<T>& data, std::optional<s
     {
         data = j.get<T>();
     }
-
 }
 
 template <const char* id_field_name, typename Seq>
-void id_variant_from_json(const json_t& j, IdVariant<id_field_name, Seq>& data, std::optional<std::string_view> key)
+void id_variant_from_json(const json_t& j,
+                          IdVariant<id_field_name, Seq>& data,
+                          std::optional<std::string_view> key)
 {
     if (key)
     {
@@ -145,7 +154,8 @@ void id_variant_from_json(const json_t& j, IdVariant<id_field_name, Seq>& data, 
             throw std::bad_variant_access{};
         }
     }
-    else {
+    else
+    {
         // No key
         if (!data.from_json(j))
             throw std::bad_variant_access{};
@@ -153,35 +163,28 @@ void id_variant_from_json(const json_t& j, IdVariant<id_field_name, Seq>& data, 
 }
 
 template <const char* id_field_name, typename Seq>
-void id_variant_to_json(json_t& j, const IdVariant<id_field_name, Seq>& data, std::optional<std::string_view> key)
+void id_variant_to_json(json_t& j,
+                        const IdVariant<id_field_name, Seq>& data,
+                        std::optional<std::string_view> key)
 {
     if (key)
         data.to_json(j[*key]);
     else
         data.to_json(j);
-
 }
 
-template <typename>
-constexpr bool is_optional = false;
-template <typename T>
-constexpr bool is_optional<std::optional<T>> = true;
+template <typename> constexpr bool is_optional = false;
+template <typename T> constexpr bool is_optional<std::optional<T>> = true;
 
-template <typename>
-constexpr bool is_variant = false;
-template <typename... Ts>
-constexpr bool is_variant<std::variant<Ts...>> = true;
+template <typename> constexpr bool is_variant = false;
+template <typename... Ts> constexpr bool is_variant<std::variant<Ts...>> = true;
 
-template <typename>
-constexpr bool is_id_variant = false;
-template <char const * id_field_name, typename Seq>
+template <typename> constexpr bool is_id_variant = false;
+template <char const* id_field_name, typename Seq>
 constexpr bool is_id_variant<IdVariant<id_field_name, Seq>> = true;
 
-template <typename>
-constexpr bool is_collapsing_vector = false;
-template <typename T>
-constexpr bool is_collapsing_vector<CollapsingVector<T>> = true;
-
+template <typename> constexpr bool is_collapsing_vector = false;
+template <typename T> constexpr bool is_collapsing_vector<CollapsingVector<T>> = true;
 
 template <typename T> void extended_to_json(const char* key, json_t& j, const T& value)
 {
@@ -256,7 +259,6 @@ template <typename... Ts> struct adl_serializer<std::variant<Ts...>>
     }
 };
 
-
 template <typename T> struct adl_serializer<DRAMUtils::util::CollapsingVector<T>>
 {
     static void to_json(json_t& j, const DRAMUtils::util::CollapsingVector<T>& data)
@@ -270,8 +272,8 @@ template <typename T> struct adl_serializer<DRAMUtils::util::CollapsingVector<T>
     }
 };
 
-
-template <const char * id_field_name, typename Seq> struct adl_serializer<DRAMUtils::util::IdVariant<id_field_name, Seq>>
+template <const char* id_field_name, typename Seq>
+struct adl_serializer<DRAMUtils::util::IdVariant<id_field_name, Seq>>
 {
     static void to_json(json_t& j, const DRAMUtils::util::IdVariant<id_field_name, Seq>& data)
     {
@@ -284,7 +286,6 @@ template <const char * id_field_name, typename Seq> struct adl_serializer<DRAMUt
         DRAMUtils::util::id_variant_from_json<id_field_name, Seq>(j, data, std::nullopt);
     }
 };
-
 
 // NOLINTBEGIN(cppcoreguidelines-macro-usage)
 
@@ -304,7 +305,6 @@ template <const char * id_field_name, typename Seq> struct adl_serializer<DRAMUt
     {                                                                                              \
         NLOHMANN_JSON_EXPAND(NLOHMANN_JSON_PASTE(EXTEND_JSON_FROM, __VA_ARGS__))                   \
     }
-
 
 NLOHMANN_JSON_NAMESPACE_END
 

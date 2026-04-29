@@ -36,13 +36,13 @@
 #ifndef DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECLPDDR4_H
 #define DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECLPDDR4_H
 
-#include <string_view>
-#include <string>
-#include <optional>
 #include "DRAMUtils/util/json_utils.h"
+#include <optional>
+#include <string>
+#include <string_view>
 
-
-namespace DRAMUtils::MemSpec {
+namespace DRAMUtils::MemSpec
+{
 
 struct MemArchitectureSpecTypeLPDDR4
 {
@@ -58,9 +58,21 @@ struct MemArchitectureSpecTypeLPDDR4
     uint64_t width;
     std::optional<uint64_t> maxBurstLength;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeLPDDR4, nbrOfChannels, nbrOfDevices, nbrOfRanks, nbrOfBanks, nbrOfBankGroups, nbrOfRows, nbrOfColumns, burstLength, dataRate, width, maxBurstLength)
+NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeLPDDR4,
+                            nbrOfChannels,
+                            nbrOfDevices,
+                            nbrOfRanks,
+                            nbrOfBanks,
+                            nbrOfBankGroups,
+                            nbrOfRows,
+                            nbrOfColumns,
+                            burstLength,
+                            dataRate,
+                            width,
+                            maxBurstLength)
 
-struct MemImpedanceSpecTypeLPDDR4 {
+struct MemImpedanceSpecTypeLPDDR4
+{
     // Clock
     bool ck_termination;
     double ck_R_eq;
@@ -98,47 +110,105 @@ struct MemImpedanceSpecTypeLPDDR4 {
     double wdbi_R_eq;
     double wdbi_dyn_E;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR4, ck_termination, ck_R_eq, ck_dyn_E, ca_termination, ca_R_eq, ca_dyn_E, rdq_termination, rdq_R_eq, rdq_dyn_E, wdq_termination, wdq_R_eq, wdq_dyn_E, rdqs_termination, rdqs_R_eq, rdqs_dyn_E, wdqs_termination, wdqs_R_eq, wdqs_dyn_E, rdbi_termination, rdbi_R_eq, rdbi_dyn_E, wdbi_termination, wdbi_R_eq, wdbi_dyn_E)
+NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeLPDDR4,
+                            ck_termination,
+                            ck_R_eq,
+                            ck_dyn_E,
+                            ca_termination,
+                            ca_R_eq,
+                            ca_dyn_E,
+                            rdq_termination,
+                            rdq_R_eq,
+                            rdq_dyn_E,
+                            wdq_termination,
+                            wdq_R_eq,
+                            wdq_dyn_E,
+                            rdqs_termination,
+                            rdqs_R_eq,
+                            rdqs_dyn_E,
+                            wdqs_termination,
+                            wdqs_R_eq,
+                            wdqs_dyn_E,
+                            rdbi_termination,
+                            rdbi_R_eq,
+                            rdbi_dyn_E,
+                            wdbi_termination,
+                            wdbi_R_eq,
+                            wdbi_dyn_E)
 
 struct MemTimingSpecTypeLPDDR4
 {
-    double      tCK;
-    uint64_t    CKE;
-    uint64_t    ESCKE;
-    uint64_t    CMDCKE;
-    uint64_t    RAS;
-    uint64_t    RCD;
-    uint64_t    RL;
-    uint64_t    REFI;
-    uint64_t    REFIpb;
-    uint64_t    RFCpb;
-    uint64_t    RFCab;
-    uint64_t    RPpb;
-    uint64_t    RPab;
-    uint64_t    RCpb;
-    uint64_t    RCab;
-    uint64_t    PPD;
-    uint64_t    FAW;
-    uint64_t    RRD;
-    uint64_t    CCD;
-    uint64_t    CCDMW;
-    uint64_t    RPST;
-    uint64_t    DQSCK;
-    uint64_t    RTP;
-    uint64_t    WL;
-    uint64_t    DQSS;
-    uint64_t    DQS2DQ;
-    uint64_t    WR;
-    uint64_t    WPRE;
-    uint64_t    WTR;
-    uint64_t    XP;
-    uint64_t    SR;
-    uint64_t    XSR;
-    uint64_t    RTRS;
+    double tCK;
+    uint64_t CKE;
+    uint64_t ESCKE;
+    uint64_t CMDCKE;
+    uint64_t RAS;
+    uint64_t RCD;
+    uint64_t RL;
+    uint64_t REFI;
+    uint64_t REFIpb;
+    uint64_t RFCpb;
+    uint64_t RFCab;
+    uint64_t RPpb;
+    uint64_t RPab;
+    uint64_t RCpb;
+    uint64_t RCab;
+    uint64_t PPD;
+    uint64_t FAW;
+    uint64_t RRD;
+    uint64_t CCD;
+    uint64_t CCDMW;
+    uint64_t RPST;
+    uint64_t DQSCK;
+    uint64_t RTP;
+    uint64_t WL;
+    uint64_t DQSS;
+    uint64_t DQS2DQ;
+    uint64_t WR;
+    uint64_t WPRE;
+    uint64_t WTR;
+    uint64_t XP;
+    uint64_t SR;
+    uint64_t XSR;
+    uint64_t RTRS;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeLPDDR4, tCK, CKE, ESCKE, CMDCKE, RAS, RCD, RL, REFI, REFIpb, RFCpb, RFCab, RPpb, RPab, RCpb, RCab, PPD, FAW, RRD, CCD, CCDMW, RPST, DQSCK, RTP, WL, DQSS, DQS2DQ, WR, WPRE, WTR, XP, SR, XSR, RTRS)
+NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeLPDDR4,
+                            tCK,
+                            CKE,
+                            ESCKE,
+                            CMDCKE,
+                            RAS,
+                            RCD,
+                            RL,
+                            REFI,
+                            REFIpb,
+                            RFCpb,
+                            RFCab,
+                            RPpb,
+                            RPab,
+                            RCpb,
+                            RCab,
+                            PPD,
+                            FAW,
+                            RRD,
+                            CCD,
+                            CCDMW,
+                            RPST,
+                            DQSCK,
+                            RTP,
+                            WL,
+                            DQSS,
+                            DQS2DQ,
+                            WR,
+                            WPRE,
+                            WTR,
+                            XP,
+                            SR,
+                            XSR,
+                            RTRS)
 
-enum class pasrModesType {
+enum class pasrModesType
+{
     PASR_0,
     PASR_1,
     PASR_2,
@@ -150,57 +220,84 @@ enum class pasrModesType {
     Invalid = -1,
 };
 NLOHMANN_JSON_SERIALIZE_ENUM(pasrModesType,
-                             {{pasrModesType::Invalid, nullptr},
-                              {pasrModesType::PASR_0, 0},
-                              {pasrModesType::PASR_1, 1},
-                              {pasrModesType::PASR_2, 2},
-                              {pasrModesType::PASR_3, 3},
-                              {pasrModesType::PASR_4, 4},
-                              {pasrModesType::PASR_5, 5},
-                              {pasrModesType::PASR_6, 6},
-                              {pasrModesType::PASR_7, 7},})
+                             {
+                                 {pasrModesType::Invalid, nullptr},
+                                 {pasrModesType::PASR_0, 0},
+                                 {pasrModesType::PASR_1, 1},
+                                 {pasrModesType::PASR_2, 2},
+                                 {pasrModesType::PASR_3, 3},
+                                 {pasrModesType::PASR_4, 4},
+                                 {pasrModesType::PASR_5, 5},
+                                 {pasrModesType::PASR_6, 6},
+                                 {pasrModesType::PASR_7, 7},
+                             })
 
 struct BankWiseSpecTypeLPDDR4
 {
-    std::optional<double>           factRho;
-    std::optional<double>           factSigma;
-    std::optional<pasrModesType>    pasrMode;
-    std::optional<bool>             hasPASR;
+    std::optional<double> factRho;
+    std::optional<double> factSigma;
+    std::optional<pasrModesType> pasrMode;
+    std::optional<bool> hasPASR;
 };
 NLOHMANN_JSONIFY_ALL_THINGS(BankWiseSpecTypeLPDDR4, factRho, factSigma, pasrMode, hasPASR)
 
 struct MemPowerSpecTypeLPDDR4
 {
-    double  vdd1;
-    double  idd01;
-    double  idd2n1;
-    double  idd3n1;
-    double  idd4r1;
-    double  idd4w1;
-    double  idd51;
-    double  idd5pb1;
-    double  idd61;
-    double  idd2p1;
-    double  idd3p1;
+    double vdd1;
+    double idd01;
+    double idd2n1;
+    double idd3n1;
+    double idd4r1;
+    double idd4w1;
+    double idd51;
+    double idd5pb1;
+    double idd61;
+    double idd2p1;
+    double idd3p1;
 
-    double  vdd2;
-    double  idd02;
-    double  idd2n2;
-    double  idd3n2;
-    double  idd4r2;
-    double  idd4w2;
-    double  idd52;
-    double  idd5pb2;
-    double  idd62;
-    double  idd2p2;
-    double  idd3p2;
+    double vdd2;
+    double idd02;
+    double idd2n2;
+    double idd3n2;
+    double idd4r2;
+    double idd4w2;
+    double idd52;
+    double idd5pb2;
+    double idd62;
+    double idd2p2;
+    double idd3p2;
 
     double vddq;
 
     std::optional<double> iBeta_vdd1;
     std::optional<double> iBeta_vdd2;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemPowerSpecTypeLPDDR4, vdd1, idd01, idd2n1, idd3n1, idd4r1, idd4w1, idd51, idd5pb1, idd61, idd2p1, idd3p1, vdd2, idd02, idd2n2, idd3n2, idd4r2, idd4w2, idd52, idd5pb2, idd62, idd2p2, idd3p2, vddq, iBeta_vdd1, iBeta_vdd2)
+NLOHMANN_JSONIFY_ALL_THINGS(MemPowerSpecTypeLPDDR4,
+                            vdd1,
+                            idd01,
+                            idd2n1,
+                            idd3n1,
+                            idd4r1,
+                            idd4w1,
+                            idd51,
+                            idd5pb1,
+                            idd61,
+                            idd2p1,
+                            idd3p1,
+                            vdd2,
+                            idd02,
+                            idd2n2,
+                            idd3n2,
+                            idd4r2,
+                            idd4w2,
+                            idd52,
+                            idd5pb2,
+                            idd62,
+                            idd2p2,
+                            idd3p2,
+                            vddq,
+                            iBeta_vdd1,
+                            iBeta_vdd2)
 
 struct MemSpecLPDDR4
 {
@@ -213,7 +310,13 @@ struct MemSpecLPDDR4
     MemImpedanceSpecTypeLPDDR4 memimpedancespec;
     std::optional<BankWiseSpecTypeLPDDR4> bankwisespec;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemSpecLPDDR4, memoryId, memarchitecturespec, mempowerspec, memtimingspec, memimpedancespec, bankwisespec)
+NLOHMANN_JSONIFY_ALL_THINGS(MemSpecLPDDR4,
+                            memoryId,
+                            memarchitecturespec,
+                            mempowerspec,
+                            memtimingspec,
+                            memimpedancespec,
+                            bankwisespec)
 
 } // namespace DRAMUtils::MemSpec
 

@@ -3,7 +3,8 @@
 
 #include <DRAMUtils/util/json_utils.h>
 
-namespace DRAMUtils::Config {
+namespace DRAMUtils::Config
+{
 
 enum class TogglingRateIdlePattern
 {
@@ -27,7 +28,13 @@ struct ToggleRateDefinition
     TogglingRateIdlePattern idlePatternRead;
     TogglingRateIdlePattern idlePatternWrite;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(ToggleRateDefinition, togglingRateRead, togglingRateWrite, dutyCycleRead, dutyCycleWrite, idlePatternRead, idlePatternWrite)
+NLOHMANN_JSONIFY_ALL_THINGS(ToggleRateDefinition,
+                            togglingRateRead,
+                            togglingRateWrite,
+                            dutyCycleRead,
+                            dutyCycleWrite,
+                            idlePatternRead,
+                            idlePatternWrite)
 
 } // namespace DRAMUtils::Config
 

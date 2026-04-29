@@ -36,54 +36,52 @@
 #ifndef DRAMUTILS_MEMSPEC_MEMSPEC_H
 #define DRAMUTILS_MEMSPEC_MEMSPEC_H
 
-#include <string>
-#include <variant>
-#include <iostream>
 #include <filesystem>
 #include <fstream>
+#include <iostream>
 #include <optional>
+#include <string>
 #include <string_view>
+#include <variant>
 
+#include "DRAMUtils/util/id_variant.h"
 #include "DRAMUtils/util/json_utils.h"
 #include "DRAMUtils/util/types.h"
-#include "DRAMUtils/util/id_variant.h"
 
 #include "standards/MemSpecDDR3.h"
 #include "standards/MemSpecDDR4.h"
 #include "standards/MemSpecDDR5.h"
-#include "standards/MemSpecLPDDR4.h"
-#include "standards/MemSpecLPDDR5.h"
-#include "standards/MemSpecLPDDR6.h"
-#include "standards/MemSpecWideIO.h"
-#include "standards/MemSpecWideIO2.h"
 #include "standards/MemSpecGDDR5.h"
 #include "standards/MemSpecGDDR5X.h"
 #include "standards/MemSpecGDDR6.h"
 #include "standards/MemSpecHBM2.h"
 #include "standards/MemSpecHBM3_4.h"
+#include "standards/MemSpecLPDDR4.h"
+#include "standards/MemSpecLPDDR5.h"
+#include "standards/MemSpecLPDDR6.h"
 #include "standards/MemSpecSTTMRAM.h"
+#include "standards/MemSpecWideIO.h"
+#include "standards/MemSpecWideIO2.h"
 
 namespace DRAMUtils::MemSpec
 {
 
 // Variant types
-using VariantTypes = util::type_sequence<
-    MemSpecDDR3,
-    MemSpecDDR4,
-    MemSpecDDR5,
-    MemSpecLPDDR4,
-    MemSpecLPDDR5,
-    MemSpecLPDDR6,
-    MemSpecWideIO,
-    MemSpecWideIO2,
-    MemSpecGDDR5,
-    MemSpecGDDR5X,
-    MemSpecGDDR6,
-    MemSpecHBM2,
-    MemSpecHBM3,
-    MemSpecHBM4,
-    MemSpecSTTMRAM
->;
+using VariantTypes = util::type_sequence<MemSpecDDR3,
+                                         MemSpecDDR4,
+                                         MemSpecDDR5,
+                                         MemSpecLPDDR4,
+                                         MemSpecLPDDR5,
+                                         MemSpecLPDDR6,
+                                         MemSpecWideIO,
+                                         MemSpecWideIO2,
+                                         MemSpecGDDR5,
+                                         MemSpecGDDR5X,
+                                         MemSpecGDDR6,
+                                         MemSpecHBM2,
+                                         MemSpecHBM3,
+                                         MemSpecHBM4,
+                                         MemSpecSTTMRAM>;
 
 DRAMUTILS_DECLARE_IDVARIANT(MemSpecVariant, "memoryType", VariantTypes)
 
@@ -96,7 +94,8 @@ NLOHMANN_JSONIFY_ALL_THINGS(MemSpecContainer, memspec)
 
 } // namespace DRAMUtils::MemSpec
 
-namespace DRAMUtils {
+namespace DRAMUtils
+{
 
 namespace detail
 {
@@ -105,23 +104,25 @@ struct keys
     static constexpr char memSpec[] = "memspec";
 };
 
-};
+}; // namespace detail
 
 /**
  * @brief Parses Memspec from JSON data into a MemSpecVariant object.
- * 
+ *
  * This function attempts to parse a MemSpecVariant object from JSON data. It first
  * checks if the provided key exists in the JSON object; if found, it tries to extract
  * and parse the corresponding JSON value into the MemSpecVariant. If no key is provided
  * or the key is not found, it attempts to parse the entire JSON object directly.
- * 
+ *
  * @param json The json object containing the MemSpec data
  * @param key Optional key to locate the MemSpec data in the json object.
  *            Defaults to "memspec" if not provided.
- * 
- * @return An optional MemSpecVariant object if the JSON data was successfully parsed or std::nullopt otherwise.
+ *
+ * @return An optional MemSpecVariant object if the JSON data was successfully parsed or
+ * std::nullopt otherwise.
  */
-inline std::optional<MemSpec::MemSpecVariant> parse_memspec_from_json(const json_t& json, std::string_view key = detail::keys::memSpec)
+inline std::optional<MemSpec::MemSpecVariant>
+parse_memspec_from_json(const json_t& json, std::string_view key = detail::keys::memSpec)
 {
     try
     {
@@ -142,14 +143,16 @@ inline std::optional<MemSpec::MemSpecVariant> parse_memspec_from_json(const json
 /**
  * @brief Parses Memspec from a string buffer into a MemSpecVariant object.
  *        This function is a wrapper around parse_memspec_from_json.
- * 
+ *
  * @param buffer The string buffer containing the MemSpec data
  * @param key Optional key to locate the MemSpec data in the json object.
  *           Defaults to "memspec" if not provided.
- * 
- * @return An optional MemSpecVariant object if the JSON data was successfully parsed or std::nullopt otherwise.
+ *
+ * @return An optional MemSpecVariant object if the JSON data was successfully parsed or
+ * std::nullopt otherwise.
  */
-inline std::optional<MemSpec::MemSpecVariant> parse_Memspec_from_buffer(std::string_view buffer, std::string_view key = detail::keys::memSpec)
+inline std::optional<MemSpec::MemSpecVariant>
+parse_Memspec_from_buffer(std::string_view buffer, std::string_view key = detail::keys::memSpec)
 {
     try
     {
@@ -164,14 +167,17 @@ inline std::optional<MemSpec::MemSpecVariant> parse_Memspec_from_buffer(std::str
 /**
  * @brief Parses Memspec from a file into a MemSpecVariant object.
  *       This function is a wrapper around parse_memspec_from_json.
- * 
+ *
  * @param path The path to the file containing the MemSpec data
  * @param key Optional key to locate the MemSpec data in the json object.
  *          Defaults to "memspec" if not provided.
- * 
- * @return An optional MemSpecVariant object if the JSON data was successfully parsed or std::nullopt otherwise.
+ *
+ * @return An optional MemSpecVariant object if the JSON data was successfully parsed or
+ * std::nullopt otherwise.
  */
-inline std::optional<MemSpec::MemSpecVariant> parse_memspec_from_file(const std::filesystem::path &path, std::string_view key = detail::keys::memSpec)
+inline std::optional<MemSpec::MemSpecVariant>
+parse_memspec_from_file(const std::filesystem::path& path,
+                        std::string_view key = detail::keys::memSpec)
 {
     try
     {

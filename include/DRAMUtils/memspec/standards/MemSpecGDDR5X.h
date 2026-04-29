@@ -36,12 +36,12 @@
 #ifndef DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECGDDR5X_H
 #define DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECGDDR5X_H
 
-#include <string_view>
-#include <string>
 #include "DRAMUtils/util/json_utils.h"
+#include <string>
+#include <string_view>
 
-
-namespace DRAMUtils::MemSpec {
+namespace DRAMUtils::MemSpec
+{
 
 struct MemArchitectureSpecTypeGDDR5X
 {
@@ -57,47 +57,93 @@ struct MemArchitectureSpecTypeGDDR5X
     uint64_t nbrOfBanks;
     uint64_t nbrOfBankGroups;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeGDDR5X, nbrOfRows, nbrOfColumns, burstLength, maxBurstLength, dataRate, width, nbrOfChannels, nbrOfDevices, nbrOfRanks, nbrOfBanks, nbrOfBankGroups)
+NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeGDDR5X,
+                            nbrOfRows,
+                            nbrOfColumns,
+                            burstLength,
+                            maxBurstLength,
+                            dataRate,
+                            width,
+                            nbrOfChannels,
+                            nbrOfDevices,
+                            nbrOfRanks,
+                            nbrOfBanks,
+                            nbrOfBankGroups)
 
 struct MemTimingSpecTypeGDDR5X
 {
     double tCK;
-    uint64_t    RP;
-    uint64_t    RAS;
-    uint64_t    RC;
-    uint64_t    RCDRD;
-    uint64_t    RCDWR;
-    uint64_t    RTP;
-    uint64_t    RRDS;
-    uint64_t    RRDL;
-    uint64_t    CCDS;
-    uint64_t    CCDL;
-    uint64_t    CL;
-    uint64_t    WCK2CKPIN;
-    uint64_t    WCK2CK;
-    uint64_t    WCK2DQO;
-    uint64_t    RTW;
-    uint64_t    WL;
-    uint64_t    WCK2DQI;
-    uint64_t    WR;
-    uint64_t    WTRS;
-    uint64_t    WTRL;
-    uint64_t    CKE;
-    uint64_t    PD;
-    uint64_t    XP;
-    uint64_t    REFI;
-    uint64_t    REFIPB;
-    uint64_t    RFC;
-    uint64_t    RFCPB;
-    uint64_t    RREFD;
-    uint64_t    XS;
-    uint64_t    FAW;
-    uint64_t    _32AW;
-    uint64_t    PPD;
-    uint64_t    LK;
-    uint64_t    TRS;
+    uint64_t RP;
+    uint64_t RAS;
+    uint64_t RC;
+    uint64_t RCDRD;
+    uint64_t RCDWR;
+    uint64_t RTP;
+    uint64_t RRDS;
+    uint64_t RRDL;
+    uint64_t CCDS;
+    uint64_t CCDL;
+    uint64_t CL;
+    uint64_t WCK2CKPIN;
+    uint64_t WCK2CK;
+    uint64_t WCK2DQO;
+    uint64_t RTW;
+    uint64_t WL;
+    uint64_t WCK2DQI;
+    uint64_t WR;
+    uint64_t WTRS;
+    uint64_t WTRL;
+    uint64_t CKE;
+    uint64_t PD;
+    uint64_t XP;
+    uint64_t REFI;
+    uint64_t REFIPB;
+    uint64_t RFC;
+    uint64_t RFCPB;
+    uint64_t RREFD;
+    uint64_t XS;
+    uint64_t FAW;
+    uint64_t _32AW;
+    uint64_t PPD;
+    uint64_t LK;
+    uint64_t TRS;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeGDDR5X, tCK, RP, RAS, RC, RCDRD, RCDWR, RTP, RRDS, RRDL, CCDS, CCDL, CL, WCK2CKPIN, WCK2CK, WCK2DQO, RTW, WL, WCK2DQI, WR, WTRS, WTRL, CKE, PD, XP, REFI, REFIPB, RFC, RFCPB, RREFD, XS, FAW, _32AW, PPD, LK, TRS)
+NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeGDDR5X,
+                            tCK,
+                            RP,
+                            RAS,
+                            RC,
+                            RCDRD,
+                            RCDWR,
+                            RTP,
+                            RRDS,
+                            RRDL,
+                            CCDS,
+                            CCDL,
+                            CL,
+                            WCK2CKPIN,
+                            WCK2CK,
+                            WCK2DQO,
+                            RTW,
+                            WL,
+                            WCK2DQI,
+                            WR,
+                            WTRS,
+                            WTRL,
+                            CKE,
+                            PD,
+                            XP,
+                            REFI,
+                            REFIPB,
+                            RFC,
+                            RFCPB,
+                            RREFD,
+                            XS,
+                            FAW,
+                            _32AW,
+                            PPD,
+                            LK,
+                            TRS)
 
 struct MemSpecGDDR5X
 {
@@ -106,7 +152,6 @@ struct MemSpecGDDR5X
 
     MemArchitectureSpecTypeGDDR5X memarchitecturespec;
     MemTimingSpecTypeGDDR5X memtimingspec;
-
 };
 NLOHMANN_JSONIFY_ALL_THINGS(MemSpecGDDR5X, memoryId, memarchitecturespec, memtimingspec)
 

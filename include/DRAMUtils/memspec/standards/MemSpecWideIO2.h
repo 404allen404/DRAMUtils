@@ -36,12 +36,12 @@
 #ifndef DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECWIDEIO2_H
 #define DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECWIDEIO2_H
 
-#include <string_view>
-#include <string>
 #include "DRAMUtils/util/json_utils.h"
+#include <string>
+#include <string_view>
 
-
-namespace DRAMUtils::MemSpec {
+namespace DRAMUtils::MemSpec
+{
 
 struct MemArchitectureSpecTypeWideIO2
 {
@@ -56,39 +56,76 @@ struct MemArchitectureSpecTypeWideIO2
     uint64_t nbrOfDevices;
     uint64_t nbrOfBanks;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeWideIO2, nbrOfRows, nbrOfColumns, burstLength, maxBurstLength, dataRate, width, nbrOfChannels, nbrOfRanks, nbrOfDevices, nbrOfBanks)
+NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeWideIO2,
+                            nbrOfRows,
+                            nbrOfColumns,
+                            burstLength,
+                            maxBurstLength,
+                            dataRate,
+                            width,
+                            nbrOfChannels,
+                            nbrOfRanks,
+                            nbrOfDevices,
+                            nbrOfBanks)
 
 struct MemTimingSpecTypeWideIO2
 {
-    double      tCK;
-    uint64_t    DQSCK;
-    uint64_t    DQSS;
-    uint64_t    CKE;
-    uint64_t    RL;
-    uint64_t    WL;
-    uint64_t    RCPB;
-    uint64_t    RCAB;
-    uint64_t    CKESR;
-    uint64_t    XSR;
-    uint64_t    XP;
-    uint64_t    CCD;
-    uint64_t    RTP;
-    uint64_t    RCD;
-    uint64_t    RPPB;
-    uint64_t    RPAB;
-    uint64_t    RAS;
-    uint64_t    WR;
-    uint64_t    WTR;
-    uint64_t    RRD;
-    uint64_t    FAW;
-    uint64_t    REFI;
-    uint64_t    REFM;
-    uint64_t    REFIPB;
-    uint64_t    RFCAB;
-    uint64_t    RFCPB;
-    uint64_t    RTRS;
+    double tCK;
+    uint64_t DQSCK;
+    uint64_t DQSS;
+    uint64_t CKE;
+    uint64_t RL;
+    uint64_t WL;
+    uint64_t RCPB;
+    uint64_t RCAB;
+    uint64_t CKESR;
+    uint64_t XSR;
+    uint64_t XP;
+    uint64_t CCD;
+    uint64_t RTP;
+    uint64_t RCD;
+    uint64_t RPPB;
+    uint64_t RPAB;
+    uint64_t RAS;
+    uint64_t WR;
+    uint64_t WTR;
+    uint64_t RRD;
+    uint64_t FAW;
+    uint64_t REFI;
+    uint64_t REFM;
+    uint64_t REFIPB;
+    uint64_t RFCAB;
+    uint64_t RFCPB;
+    uint64_t RTRS;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeWideIO2, tCK, DQSCK, DQSS, CKE, RL, WL, RCPB, RCAB, CKESR, XSR, XP, CCD, RTP, RCD, RPPB, RPAB, RAS, WR, WTR, RRD, FAW, REFI, REFM, REFIPB, RFCAB, RFCPB, RTRS)
+NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeWideIO2,
+                            tCK,
+                            DQSCK,
+                            DQSS,
+                            CKE,
+                            RL,
+                            WL,
+                            RCPB,
+                            RCAB,
+                            CKESR,
+                            XSR,
+                            XP,
+                            CCD,
+                            RTP,
+                            RCD,
+                            RPPB,
+                            RPAB,
+                            RAS,
+                            WR,
+                            WTR,
+                            RRD,
+                            FAW,
+                            REFI,
+                            REFM,
+                            REFIPB,
+                            RFCAB,
+                            RFCPB,
+                            RTRS)
 
 struct MemSpecWideIO2
 {
@@ -97,7 +134,6 @@ struct MemSpecWideIO2
 
     MemArchitectureSpecTypeWideIO2 memarchitecturespec;
     MemTimingSpecTypeWideIO2 memtimingspec;
-
 };
 NLOHMANN_JSONIFY_ALL_THINGS(MemSpecWideIO2, memoryId, memarchitecturespec, memtimingspec)
 

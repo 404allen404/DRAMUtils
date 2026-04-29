@@ -36,12 +36,12 @@
 #ifndef DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECSTTMRAM_H
 #define DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECSTTMRAM_H
 
-#include <string_view>
-#include <string>
 #include "DRAMUtils/util/json_utils.h"
+#include <string>
+#include <string_view>
 
-
-namespace DRAMUtils::MemSpec {
+namespace DRAMUtils::MemSpec
+{
 
 struct MemArchitectureSpecTypeSTTMRAM
 {
@@ -56,36 +56,70 @@ struct MemArchitectureSpecTypeSTTMRAM
     uint64_t nbrOfDevices;
     uint64_t nbrOfBanks;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeSTTMRAM, nbrOfRows, nbrOfColumns, burstLength, maxBurstLength, dataRate, width, nbrOfChannels, nbrOfRanks, nbrOfDevices, nbrOfBanks)
+NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeSTTMRAM,
+                            nbrOfRows,
+                            nbrOfColumns,
+                            burstLength,
+                            maxBurstLength,
+                            dataRate,
+                            width,
+                            nbrOfChannels,
+                            nbrOfRanks,
+                            nbrOfDevices,
+                            nbrOfBanks)
 
 struct MemTimingSpecTypeSTTMRAM
 {
-    double      tCK;
-    uint64_t    CKE;
-    uint64_t    CKESR;
-    uint64_t    RAS;
-    uint64_t    RC;
-    uint64_t    RCD;
-    uint64_t    RL;
-    uint64_t    RTP;
-    uint64_t    WL;
-    uint64_t    WR;
-    uint64_t    XP;
-    uint64_t    XS;
-    uint64_t    RP;
-    uint64_t    DQSCK;
-    uint64_t    CCD;
-    uint64_t    FAW;
-    uint64_t    RRD;
-    uint64_t    WTR;
-    uint64_t    XPDLL;
-    uint64_t    XSDLL;
-    uint64_t    AL;
-    uint64_t    ACTPDEN;
-    uint64_t    PRPDEN;
-    uint64_t    RTRS;
+    double tCK;
+    uint64_t CKE;
+    uint64_t CKESR;
+    uint64_t RAS;
+    uint64_t RC;
+    uint64_t RCD;
+    uint64_t RL;
+    uint64_t RTP;
+    uint64_t WL;
+    uint64_t WR;
+    uint64_t XP;
+    uint64_t XS;
+    uint64_t RP;
+    uint64_t DQSCK;
+    uint64_t CCD;
+    uint64_t FAW;
+    uint64_t RRD;
+    uint64_t WTR;
+    uint64_t XPDLL;
+    uint64_t XSDLL;
+    uint64_t AL;
+    uint64_t ACTPDEN;
+    uint64_t PRPDEN;
+    uint64_t RTRS;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeSTTMRAM, tCK, CKE, CKESR, RAS, RC, RCD, RL, RTP, WL, WR, XP, XS, RP, DQSCK, CCD, FAW, RRD, WTR, XPDLL, XSDLL, AL, ACTPDEN, PRPDEN, RTRS)
+NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeSTTMRAM,
+                            tCK,
+                            CKE,
+                            CKESR,
+                            RAS,
+                            RC,
+                            RCD,
+                            RL,
+                            RTP,
+                            WL,
+                            WR,
+                            XP,
+                            XS,
+                            RP,
+                            DQSCK,
+                            CCD,
+                            FAW,
+                            RRD,
+                            WTR,
+                            XPDLL,
+                            XSDLL,
+                            AL,
+                            ACTPDEN,
+                            PRPDEN,
+                            RTRS)
 
 struct MemSpecSTTMRAM
 {
@@ -94,7 +128,6 @@ struct MemSpecSTTMRAM
 
     MemArchitectureSpecTypeSTTMRAM memarchitecturespec;
     MemTimingSpecTypeSTTMRAM memtimingspec;
-
 };
 NLOHMANN_JSONIFY_ALL_THINGS(MemSpecSTTMRAM, memoryId, memarchitecturespec, memtimingspec)
 

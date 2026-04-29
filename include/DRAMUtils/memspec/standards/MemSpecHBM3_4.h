@@ -36,14 +36,14 @@
 #ifndef DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECHBM3_4_H
 #define DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECHBM3_4_H
 
-#include <string_view>
-#include <string>
 #include <optional>
+#include <string>
+#include <string_view>
 
 #include "DRAMUtils/util/json_utils.h"
 
-
-namespace DRAMUtils::MemSpec {
+namespace DRAMUtils::MemSpec
+{
 
 struct MemArchitectureSpecTypeHBM3_4
 {
@@ -63,42 +63,87 @@ struct MemArchitectureSpecTypeHBM3_4
     uint64_t RAAMMT;
     uint64_t RAADEC;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeHBM3_4, nbrOfRows, nbrOfColumns, burstLength, maxBurstLength, dataRate, width, nbrOfChannels, nbrOfPseudoChannels, nbrOfDevices, nbrOfBanks, nbrOfBankGroups, nbrOfStacks, RAAIMT, RAAMMT, RAADEC)
+NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeHBM3_4,
+                            nbrOfRows,
+                            nbrOfColumns,
+                            burstLength,
+                            maxBurstLength,
+                            dataRate,
+                            width,
+                            nbrOfChannels,
+                            nbrOfPseudoChannels,
+                            nbrOfDevices,
+                            nbrOfBanks,
+                            nbrOfBankGroups,
+                            nbrOfStacks,
+                            RAAIMT,
+                            RAAMMT,
+                            RAADEC)
 
 struct MemTimingSpecTypeHBM3_4
 {
-    double      tCK;
-    uint64_t    DQSCK;
-    uint64_t    RC;
-    uint64_t    RAS;
-    uint64_t    RCDRD;
-    uint64_t    RCDWR;
-    uint64_t    RRDL;
-    uint64_t    RRDS;
-    uint64_t    FAW;
-    uint64_t    RTP;
-    uint64_t    RP;
-    uint64_t    RL;
-    uint64_t    WL;
-    uint64_t    PL;
-    uint64_t    WR;
-    uint64_t    CCDL;
-    uint64_t    CCDS;
-    uint64_t    CCDR;
-    uint64_t    WTRL;
-    uint64_t    WTRS;
-    uint64_t    RTW;
-    uint64_t    XP;
-    uint64_t    CKE;
-    uint64_t    XS;
-    uint64_t    RFC;
-    uint64_t    RFCPB;
-    uint64_t    RREFD;
-    uint64_t    REFI;
-    uint64_t    REFIPB;
-    uint64_t    PPD;
+    double tCK;
+    uint64_t DQSCK;
+    uint64_t RC;
+    uint64_t RAS;
+    uint64_t RCDRD;
+    uint64_t RCDWR;
+    uint64_t RRDL;
+    uint64_t RRDS;
+    uint64_t FAW;
+    uint64_t RTP;
+    uint64_t RP;
+    uint64_t RL;
+    uint64_t WL;
+    uint64_t PL;
+    uint64_t WR;
+    uint64_t CCDL;
+    uint64_t CCDS;
+    uint64_t CCDR;
+    uint64_t WTRL;
+    uint64_t WTRS;
+    uint64_t RTW;
+    uint64_t XP;
+    uint64_t CKE;
+    uint64_t XS;
+    uint64_t RFC;
+    uint64_t RFCPB;
+    uint64_t RREFD;
+    uint64_t REFI;
+    uint64_t REFIPB;
+    uint64_t PPD;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeHBM3_4, tCK, DQSCK, RC, RAS, RCDRD, RCDWR, RRDL, RRDS, FAW, RTP, RP, RL, WL, PL, WR, CCDL, CCDS, CCDR, WTRL, WTRS, RTW, XP, CKE, XS, RFC, RFCPB, RREFD, REFI, REFIPB, PPD)
+NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeHBM3_4,
+                            tCK,
+                            DQSCK,
+                            RC,
+                            RAS,
+                            RCDRD,
+                            RCDWR,
+                            RRDL,
+                            RRDS,
+                            FAW,
+                            RTP,
+                            RP,
+                            RL,
+                            WL,
+                            PL,
+                            WR,
+                            CCDL,
+                            CCDS,
+                            CCDR,
+                            WTRL,
+                            WTRS,
+                            RTW,
+                            XP,
+                            CKE,
+                            XS,
+                            RFC,
+                            RFCPB,
+                            RREFD,
+                            REFI,
+                            REFIPB,
+                            PPD)
 
 struct MemSpecHBM3
 {
@@ -107,7 +152,6 @@ struct MemSpecHBM3
 
     MemArchitectureSpecTypeHBM3_4 memarchitecturespec;
     MemTimingSpecTypeHBM3_4 memtimingspec;
-
 };
 NLOHMANN_JSONIFY_ALL_THINGS(MemSpecHBM3, memoryId, memarchitecturespec, memtimingspec)
 
@@ -118,7 +162,6 @@ struct MemSpecHBM4
 
     MemArchitectureSpecTypeHBM3_4 memarchitecturespec;
     MemTimingSpecTypeHBM3_4 memtimingspec;
-
 };
 NLOHMANN_JSONIFY_ALL_THINGS(MemSpecHBM4, memoryId, memarchitecturespec, memtimingspec)
 

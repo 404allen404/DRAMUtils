@@ -36,13 +36,13 @@
 #ifndef DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECDDR5_H
 #define DRAMUTILS_MEMSPEC_STANDARDS_MEMSPECDDR5_H
 
-#include <string_view>
-#include <string>
-#include <optional>
 #include "DRAMUtils/util/json_utils.h"
+#include <optional>
+#include <string>
+#include <string_view>
 
-
-namespace DRAMUtils::MemSpec {
+namespace DRAMUtils::MemSpec
+{
 
 enum class RefModeTypeDDR5
 {
@@ -50,11 +50,12 @@ enum class RefModeTypeDDR5
     REF_MODE_1 = 1,
     REF_MODE_2 = 2,
 };
-NLOHMANN_JSON_SERIALIZE_ENUM(RefModeTypeDDR5, {
-    {RefModeTypeDDR5::INVALID, nullptr},
-    {RefModeTypeDDR5::REF_MODE_1, 1},
-    {RefModeTypeDDR5::REF_MODE_2, 2},
-})
+NLOHMANN_JSON_SERIALIZE_ENUM(RefModeTypeDDR5,
+                             {
+                                 {RefModeTypeDDR5::INVALID, nullptr},
+                                 {RefModeTypeDDR5::REF_MODE_1, 1},
+                                 {RefModeTypeDDR5::REF_MODE_2, 2},
+                             })
 
 struct MemArchitectureSpecTypeDDR5
 {
@@ -79,66 +80,137 @@ struct MemArchitectureSpecTypeDDR5
     uint64_t RAAMMT;
     uint64_t RAADEC;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeDDR5, nbrOfChannels, nbrOfDevices, nbrOfRanks, nbrOfDIMMRanks, nbrOfPhysicalRanks, nbrOfLogicalRanks, nbrOfBanks, nbrOfBankGroups, nbrOfRows, nbrOfColumns, burstLength, dataRate, width, RefMode, maxBurstLength, cmdMode, RAAIMT, RAAMMT, RAADEC)
+NLOHMANN_JSONIFY_ALL_THINGS(MemArchitectureSpecTypeDDR5,
+                            nbrOfChannels,
+                            nbrOfDevices,
+                            nbrOfRanks,
+                            nbrOfDIMMRanks,
+                            nbrOfPhysicalRanks,
+                            nbrOfLogicalRanks,
+                            nbrOfBanks,
+                            nbrOfBankGroups,
+                            nbrOfRows,
+                            nbrOfColumns,
+                            burstLength,
+                            dataRate,
+                            width,
+                            RefMode,
+                            maxBurstLength,
+                            cmdMode,
+                            RAAIMT,
+                            RAAMMT,
+                            RAADEC)
 
 struct MemTimingSpecTypeDDR5
 {
-    double      tCK;
-    uint64_t    RAS;
-    uint64_t    RCD;
-    uint64_t    RTP;
-    uint64_t    WL;
-    uint64_t    WR;
-    uint64_t    RP;
+    double tCK;
+    uint64_t RAS;
+    uint64_t RCD;
+    uint64_t RTP;
+    uint64_t WL;
+    uint64_t WR;
+    uint64_t RP;
 
-    uint64_t    PPD;
-    uint64_t    RL;
-    uint64_t    RPRE;
-    uint64_t    RPST;
-    uint64_t    RDDQS;
-    uint64_t    WPRE;
-    uint64_t    WPST;
+    uint64_t PPD;
+    uint64_t RL;
+    uint64_t RPRE;
+    uint64_t RPST;
+    uint64_t RDDQS;
+    uint64_t WPRE;
+    uint64_t WPST;
 
-    uint64_t    CCD_L_slr;
-    uint64_t    CCD_L_WR_slr;
-    uint64_t    CCD_L_WR2_slr;
-    uint64_t    CCD_M_slr;
-    uint64_t    CCD_M_WR_slr;
-    uint64_t    CCD_S_slr;
-    uint64_t    CCD_S_WR_slr;
-    uint64_t    CCD_dlr;
-    uint64_t    CCD_WR_dlr;
-    uint64_t    CCD_WR_dpr;
-    uint64_t    RRD_L_slr;
-    uint64_t    RRD_S_slr;
-    uint64_t    RRD_dlr;
-    uint64_t    FAW_slr;
-    uint64_t    FAW_dlr;
-    uint64_t    WTR_L;
-    uint64_t    WTR_M;
-    uint64_t    WTR_S;
-    uint64_t    RFC1_slr; // RefModeTypeDDR5::REF_MODE_1
-    uint64_t    RFC2_slr; // RefModeTypeDDR5::REF_MODE_2
-    uint64_t    RFC1_dlr; // RefModeTypeDDR5::REF_MODE_1
-    uint64_t    RFC2_dlr; // RefModeTypeDDR5::REF_MODE_2
-    uint64_t    RFC1_dpr; // RefModeTypeDDR5::REF_MODE_1
-    uint64_t    RFC2_dpr; // RefModeTypeDDR5::REF_MODE_2
-    uint64_t    RFCsb_slr;
-    uint64_t    RFCsb_dlr;
-    uint64_t    REFI1;
-    uint64_t    REFI2;
-    uint64_t    REFISB;
-    uint64_t    REFSBRD_slr;
-    uint64_t    REFSBRD_dlr;
-    uint64_t    RTRS;
-    uint64_t    CPDED;
-    uint64_t    PD;
-    uint64_t    XP;
-    uint64_t    ACTPDEN;
-    uint64_t    PRPDEN;
-    uint64_t    REFPDEN;
+    uint64_t CCD_L_slr;
+    uint64_t CCD_L_WR_slr;
+    uint64_t CCD_L_WR2_slr;
+    uint64_t CCD_M_slr;
+    uint64_t CCD_M_WR_slr;
+    uint64_t CCD_S_slr;
+    uint64_t CCD_S_WR_slr;
+    uint64_t CCD_dlr;
+    uint64_t CCD_WR_dlr;
+    uint64_t CCD_WR_dpr;
+    uint64_t RRD_L_slr;
+    uint64_t RRD_S_slr;
+    uint64_t RRD_dlr;
+    uint64_t FAW_slr;
+    uint64_t FAW_dlr;
+    uint64_t WTR_L;
+    uint64_t WTR_M;
+    uint64_t WTR_S;
+    uint64_t RFC1_slr; // RefModeTypeDDR5::REF_MODE_1
+    uint64_t RFC2_slr; // RefModeTypeDDR5::REF_MODE_2
+    uint64_t RFC1_dlr; // RefModeTypeDDR5::REF_MODE_1
+    uint64_t RFC2_dlr; // RefModeTypeDDR5::REF_MODE_2
+    uint64_t RFC1_dpr; // RefModeTypeDDR5::REF_MODE_1
+    uint64_t RFC2_dpr; // RefModeTypeDDR5::REF_MODE_2
+    uint64_t RFCsb_slr;
+    uint64_t RFCsb_dlr;
+    uint64_t REFI1;
+    uint64_t REFI2;
+    uint64_t REFISB;
+    uint64_t REFSBRD_slr;
+    uint64_t REFSBRD_dlr;
+    uint64_t RTRS;
+    uint64_t CPDED;
+    uint64_t PD;
+    uint64_t XP;
+    uint64_t ACTPDEN;
+    uint64_t PRPDEN;
+    uint64_t REFPDEN;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeDDR5, tCK, RAS, RCD, RTP, WL, WR, RP, PPD, RL, RPRE, RPST, RDDQS, WPRE, WPST, CCD_L_slr, CCD_L_WR_slr, CCD_L_WR2_slr, CCD_M_slr, CCD_M_WR_slr, CCD_S_slr, CCD_S_WR_slr, CCD_dlr, CCD_WR_dlr, CCD_WR_dpr, RRD_L_slr, RRD_S_slr, RRD_dlr, FAW_slr, FAW_dlr, WTR_L, WTR_M, WTR_S, RFC1_slr, RFC2_slr, RFC1_dlr, RFC2_dlr, RFC1_dpr, RFC2_dpr, RFCsb_slr, RFCsb_dlr, REFI1, REFI2, REFISB, REFSBRD_slr, REFSBRD_dlr, RTRS, CPDED, PD, XP, ACTPDEN, PRPDEN, REFPDEN)
+NLOHMANN_JSONIFY_ALL_THINGS(MemTimingSpecTypeDDR5,
+                            tCK,
+                            RAS,
+                            RCD,
+                            RTP,
+                            WL,
+                            WR,
+                            RP,
+                            PPD,
+                            RL,
+                            RPRE,
+                            RPST,
+                            RDDQS,
+                            WPRE,
+                            WPST,
+                            CCD_L_slr,
+                            CCD_L_WR_slr,
+                            CCD_L_WR2_slr,
+                            CCD_M_slr,
+                            CCD_M_WR_slr,
+                            CCD_S_slr,
+                            CCD_S_WR_slr,
+                            CCD_dlr,
+                            CCD_WR_dlr,
+                            CCD_WR_dpr,
+                            RRD_L_slr,
+                            RRD_S_slr,
+                            RRD_dlr,
+                            FAW_slr,
+                            FAW_dlr,
+                            WTR_L,
+                            WTR_M,
+                            WTR_S,
+                            RFC1_slr,
+                            RFC2_slr,
+                            RFC1_dlr,
+                            RFC2_dlr,
+                            RFC1_dpr,
+                            RFC2_dpr,
+                            RFCsb_slr,
+                            RFCsb_dlr,
+                            REFI1,
+                            REFI2,
+                            REFISB,
+                            REFSBRD_slr,
+                            REFSBRD_dlr,
+                            RTRS,
+                            CPDED,
+                            PD,
+                            XP,
+                            ACTPDEN,
+                            PRPDEN,
+                            REFPDEN)
 
 struct MemPowerSpecTypeDDR5
 {
@@ -175,7 +247,34 @@ struct MemPowerSpecTypeDDR5
     std::optional<double> iBeta_vdd;
     std::optional<double> iBeta_vpp;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemPowerSpecTypeDDR5, vdd, idd0, idd2n, idd3n, idd4r, idd4w, idd5c, idd6n, idd2p, idd3p, vpp, ipp0, ipp2n, ipp3n, ipp4r, ipp4w, ipp5c, ipp6n, ipp2p, ipp3p, idd5b, idd5f, ipp5b, ipp5f, vddq, iBeta_vdd, iBeta_vpp)
+NLOHMANN_JSONIFY_ALL_THINGS(MemPowerSpecTypeDDR5,
+                            vdd,
+                            idd0,
+                            idd2n,
+                            idd3n,
+                            idd4r,
+                            idd4w,
+                            idd5c,
+                            idd6n,
+                            idd2p,
+                            idd3p,
+                            vpp,
+                            ipp0,
+                            ipp2n,
+                            ipp3n,
+                            ipp4r,
+                            ipp4w,
+                            ipp5c,
+                            ipp6n,
+                            ipp2p,
+                            ipp3p,
+                            idd5b,
+                            idd5f,
+                            ipp5b,
+                            ipp5f,
+                            vddq,
+                            iBeta_vdd,
+                            iBeta_vpp)
 
 struct BankWiseSpecTypeDDR5
 {
@@ -183,7 +282,8 @@ struct BankWiseSpecTypeDDR5
 };
 NLOHMANN_JSONIFY_ALL_THINGS(BankWiseSpecTypeDDR5, factRho)
 
-struct MemImpedanceSpecTypeDDR5 {
+struct MemImpedanceSpecTypeDDR5
+{
     // Clock
     bool ck_termination;
     double ck_R_eq;
@@ -212,9 +312,28 @@ struct MemImpedanceSpecTypeDDR5 {
     double wdqs_R_eq;
     double wdqs_dyn_E;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeDDR5, ck_termination, ck_R_eq, ck_dyn_E, ca_termination, ca_R_eq, ca_dyn_E, rdq_termination, rdq_R_eq, rdq_dyn_E, wdq_termination, wdq_R_eq, wdq_dyn_E, rdqs_termination, rdqs_R_eq, rdqs_dyn_E, wdqs_termination, wdqs_R_eq, wdqs_dyn_E)
+NLOHMANN_JSONIFY_ALL_THINGS(MemImpedanceSpecTypeDDR5,
+                            ck_termination,
+                            ck_R_eq,
+                            ck_dyn_E,
+                            ca_termination,
+                            ca_R_eq,
+                            ca_dyn_E,
+                            rdq_termination,
+                            rdq_R_eq,
+                            rdq_dyn_E,
+                            wdq_termination,
+                            wdq_R_eq,
+                            wdq_dyn_E,
+                            rdqs_termination,
+                            rdqs_R_eq,
+                            rdqs_dyn_E,
+                            wdqs_termination,
+                            wdqs_R_eq,
+                            wdqs_dyn_E)
 
-struct DataRateSpecTypeDDR5 {
+struct DataRateSpecTypeDDR5
+{
     uint64_t ca_bus_rate;
     uint64_t dq_bus_rate;
     uint64_t dqs_bus_rate;
@@ -225,7 +344,7 @@ struct MemSpecDDR5
 {
     static constexpr inline const std::string_view id = "DDR5";
     std::string memoryId;
-    
+
     MemArchitectureSpecTypeDDR5 memarchitecturespec;
     MemPowerSpecTypeDDR5 mempowerspec;
     MemTimingSpecTypeDDR5 memtimingspec;
@@ -233,7 +352,14 @@ struct MemSpecDDR5
     MemImpedanceSpecTypeDDR5 memimpedancespec;
     std::optional<DataRateSpecTypeDDR5> dataratespec;
 };
-NLOHMANN_JSONIFY_ALL_THINGS(MemSpecDDR5, memoryId, memarchitecturespec, mempowerspec, memtimingspec, bankwisespec, memimpedancespec, dataratespec)
+NLOHMANN_JSONIFY_ALL_THINGS(MemSpecDDR5,
+                            memoryId,
+                            memarchitecturespec,
+                            mempowerspec,
+                            memtimingspec,
+                            bankwisespec,
+                            memimpedancespec,
+                            dataratespec)
 
 } // namespace DRAMUtils::MemSpec
 
